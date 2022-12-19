@@ -1,12 +1,15 @@
-import React from 'react';
-import styles from './App.module.scss';
+import React, { ReactElement } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ROUTES } from './routes';
+import Login from './views/login';
 
-function App() {
+function App(): ReactElement {
   return (
-    <div className={styles.app}>
-      App
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={ROUTES.LOGIN} element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
 export default App;

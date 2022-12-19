@@ -1,0 +1,35 @@
+.signIn {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.buttonColor {
+  background-color: #C781FF;
+  border-radius: 25px;
+  padding: 15px 20px;
+  font-size: 16px;
+  color: white;
+}
+
+.hr {
+  height: 2px;
+  margin: 60px 0 50px 0;
+  background: radial-gradient(circle, rgba(199,129,255,0.1) 0%, rgba(199,129,255,0.4) 35%, rgba(199,129,255,0.9) 100%);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.forgotButton {
+  color: black;
+  font-size: 16px;
+  text-transform: none;
+  position: absolute;
+  margin-right: 0;
+}
+
