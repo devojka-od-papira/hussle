@@ -26,5 +26,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/function-component-definition': 'off',
     'import/prefer-default-export': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };
