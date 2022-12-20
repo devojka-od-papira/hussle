@@ -3,7 +3,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Button from './index';
-import styles from './Button.module.scss';
 
 export default {
   title: 'Component/Button',
@@ -28,5 +27,5 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   text: 'Submit',
-  className: styles.buttonColor,
+  className: 'button',
 };
