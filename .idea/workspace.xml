@@ -5,26 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59969e92-d871-4934-b1c9-b5195e465e96" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/button/Button.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/button/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/forgetPassword/ForgetPassword.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/forgetPassword/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/input/Input.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/input/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/signIn/SignIn.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/signIn/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/signUp/SignUp.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/signUp/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/login/Login.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button/Button.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button/Button.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/button/Button.stories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/button/Button.stories.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +26,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="setup" />
-                    <option name="lastUsedInstant" value="1670914691" />
+                    <option name="branchName" value="storybook" />
+                    <option name="lastUsedInstant" value="1671524657" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1670914690" />
+                    <option name="lastUsedInstant" value="1671451874" />
                   </RecentBranch>
                 </list>
               </option>
@@ -67,22 +50,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/apple/Projects/jira&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/apple/Projects/jira/node_modules/prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/apple/Projects/jira/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/apple/Projects/jira",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/apple/Projects/jira/node_modules/prettier",
+    "ts.external.directory.path": "/Users/apple/Projects/jira/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
