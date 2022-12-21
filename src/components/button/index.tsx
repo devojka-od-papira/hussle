@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import cx from 'classnames';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-  text: string;
   onClick: () => void;
   className?: string;
+  children?: ReactNode;
 }
-const Button: React.FC<ButtonProps> = ({ text, onClick, className }) => (
+const Button: React.FC<ButtonProps> = ({
+  onClick, className, children,
+}) => (
   <button
     onClick={onClick}
     className={cx(styles.button, className)}
     type="button"
   >
-    {text}
+    {children}
   </button>
 );
 export default Button;

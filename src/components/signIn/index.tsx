@@ -19,10 +19,10 @@ const SignIn:React.FC<SignInProps> = ({ isActive, setIsActive }) => {
     <div className={cx(styles.signIn)}>
       <Input placeholder="User name" id="user" type="text" />
       <Input placeholder="Password" id="pass" type="password" />
-      <Button text="Sign in" onClick={submit} className={cx(styles.buttonColor)} />
+      <Button onClick={submit} className={cx(styles.buttonColor)}>Sign in</Button>
       <div className={styles.hr}> </div>
       <div className={styles.wrapper}>
-        <Button text="Forgot Password?" onClick={setIsActive} className={styles.forgotButton} />
+        <Button onClick={setIsActive} className={styles.forgotButton}>Forgot Password?</Button>
       </div>
     </div>
   ) : (<ForgetPassword />);
