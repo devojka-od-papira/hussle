@@ -13,7 +13,7 @@ const ForgetPassword:React.FC = () => (
     <Input placeholder="User name" id="user" type="text" />
     <Input placeholder="Password" id="pass" type="password" />
     <Input placeholder="Confirm Password" id="pass" type="password" />
-    <Button text="Submit" onClick={submit} className={cx(styles.buttonColor)} />
+    <Button onClick={submit} className={cx(styles.buttonColor)}>Submit</Button>
   </div>
 );
 export default ForgetPassword;

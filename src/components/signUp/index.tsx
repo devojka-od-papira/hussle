@@ -21,10 +21,12 @@ const SignUp:React.FC<SignUpProps> = ({ setIsActive }) => {
       <Input placeholder="Email" id="pass" type="text" />
       <Input placeholder="Password" id="pass" type="password" />
       <Input placeholder="Repeat Password" id="pass" type="password" />
-      <Button text="Sign up" onClick={submit} className={cx(styles.buttonColor)} />
+      <Button onClick={submit} className={cx(styles.buttonColor)}>Sign up</Button>
       <div className={styles.hr} />
       <div className={styles.wrapper}>
-        <Button text="Already have an account?" onClick={setIsActive} className={styles.alreadyButton} />
+        <Button onClick={setIsActive} className={styles.alreadyButton}>
+          Already have an account?
+        </Button>
       </div>
     </div>
   );

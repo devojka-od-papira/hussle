@@ -16,8 +16,8 @@ const Login = () => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.buttonWrapper}>
-            <Button text="Sign in" onClick={() => handleClick(0)} className={styles.button} />
-            <Button text="Sign up" onClick={() => handleClick(1)} className={styles.button} />
+            <Button onClick={() => handleClick(0)} className={styles.button}>Sign in</Button>
+            <Button onClick={() => handleClick(1)} className={styles.button}>Sign up</Button>
           </div>
           <div>
             <div className={styles.hr} style={{ transform: `translateX(${isActive < 2 ? isActive * 150 : 0}px)` }} />

@@ -1,0 +1,52 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.buttonPlusCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, rgba(127,175,249,1) 0%, rgba(115,178,248,1) 50%, rgba(101,182,247,1) 100%);
+}
+
+.buttonShadow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px #D2D7E0;
+}
+
+.buttonDotted {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px dashed #9898AE;
+}
+
+.textIcon {
+  font-size: 16px;
+  font-family: Roboto, serif;
+  text-transform: none;
+  svg{
+    margin-left: 6px;
+  }
+}
+
+.buttonColor {
+  background-color: #C781FF;
+  border-radius: 25px;
+  padding: 15px 20px;
+  font-size: 16px;
+  color: white;
+  width: 300px;
+}
