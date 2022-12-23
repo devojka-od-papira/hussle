@@ -27,5 +27,9 @@ module.exports = {
     'react/function-component-definition': 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+    'no-shadow': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

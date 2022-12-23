@@ -1,12 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {
   ChevronDown, Paperclip, Plus, PlusCircle,
 } from 'react-feather';
-
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import Button from './index';
+
 import styles from './Button.stories.module.scss';
 
 export default {
@@ -65,16 +64,16 @@ const TemplateTextIcon: ComponentStory<typeof Button> = (args) => (
   </Button>
 );
 
-export const buttonTab = TemplateTab.bind({});
+export const ButtonTab = TemplateTab.bind({});
 
-export const buttonTabColor = TemplateSignInButton.bind({});
+export const ButtonTabColor = TemplateSignInButton.bind({});
 
-export const buttonIcon = TemplateIcon.bind({});
+export const ButtonIcon = TemplateIcon.bind({});
 
-export const buttonIconCircle = TemplateIconCircle.bind({});
+export const ButtonIconCircle = TemplateIconCircle.bind({});
 
-export const buttonIconShadow = TemplateIconShadow.bind({});
+export const ButtonIconShadow = TemplateIconShadow.bind({});
 
-export const buttonIconDotted = TemplateIconDotted.bind({});
+export const ButtonIconDotted = TemplateIconDotted.bind({});
 
-export const buttonTextIcon = TemplateTextIcon.bind({});
+export const ButtonTextIcon = TemplateTextIcon.bind({});
