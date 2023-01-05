@@ -19,7 +19,6 @@ const SignIn:React.FC<SignInProps> = ({ isActive, setIsActive }) => {
 
   return isActive === 0 ? (
     <div className={cx(styles.signIn)}>
-      <PriorityTag>Low</PriorityTag>
       <Input placeholder="User name" id="user" type="text" />
       <Input placeholder="Password" id="pass" type="password" />
       <Button onClick={submit} className={cx(styles.buttonColor)}>
