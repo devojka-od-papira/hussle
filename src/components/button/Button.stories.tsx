@@ -1,10 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   ChevronDown, Paperclip, Plus, PlusCircle,
 } from 'react-feather';
 import Button from './index';
+import Typography, { TextType } from '../typography';
 
 import styles from './Button.stories.module.scss';
 
@@ -23,13 +24,17 @@ export default {
 
 const TemplateTab: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.buttonRed, styles.button)}>
-    Sign in
+    <Typography variant="h2" type={TextType.Heading2}>
+      Sign in
+    </Typography>
   </Button>
 );
 
 const TemplateSignInButton: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.buttonColor, styles.button)}>
-    Sign in
+    <Typography variant="h2" type={TextType.Heading2}>
+      Submit
+    </Typography>
   </Button>
 );
 
@@ -59,7 +64,9 @@ const TemplateIconDotted: ComponentStory<typeof Button> = (args) => (
 
 const TemplateTextIcon: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.textIcon, styles.button)}>
-    Add task
+    <Typography variant="h4">
+      Add task
+    </Typography>
     <PlusCircle color="gray" size={16} />
   </Button>
 );
