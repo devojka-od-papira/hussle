@@ -1,12 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
   ChevronDown, Paperclip, Plus, PlusCircle,
 } from 'react-feather';
-
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import Button from './index';
+import Typography, { TextType } from '../typography';
+
 import styles from './Button.stories.module.scss';
 
 export default {
@@ -24,13 +24,17 @@ export default {
 
 const TemplateTab: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.buttonRed, styles.button)}>
-    Sign in
+    <Typography variant="h2" type={TextType.Heading2}>
+      Sign in
+    </Typography>
   </Button>
 );
 
 const TemplateSignInButton: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.buttonColor, styles.button)}>
-    Sign in
+    <Typography variant="h2" type={TextType.Heading2}>
+      Submit
+    </Typography>
   </Button>
 );
 
@@ -60,21 +64,23 @@ const TemplateIconDotted: ComponentStory<typeof Button> = (args) => (
 
 const TemplateTextIcon: ComponentStory<typeof Button> = (args) => (
   <Button {...args} className={cx(styles.textIcon, styles.button)}>
-    Add task
+    <Typography variant="h4">
+      Add task
+    </Typography>
     <PlusCircle color="gray" size={16} />
   </Button>
 );
 
-export const buttonTab = TemplateTab.bind({});
+export const ButtonTab = TemplateTab.bind({});
 
-export const buttonTabColor = TemplateSignInButton.bind({});
+export const ButtonTabColor = TemplateSignInButton.bind({});
 
-export const buttonIcon = TemplateIcon.bind({});
+export const ButtonIcon = TemplateIcon.bind({});
 
-export const buttonIconCircle = TemplateIconCircle.bind({});
+export const ButtonIconCircle = TemplateIconCircle.bind({});
 
-export const buttonIconShadow = TemplateIconShadow.bind({});
+export const ButtonIconShadow = TemplateIconShadow.bind({});
 
-export const buttonIconDotted = TemplateIconDotted.bind({});
+export const ButtonIconDotted = TemplateIconDotted.bind({});
 
-export const buttonTextIcon = TemplateTextIcon.bind({});
+export const ButtonTextIcon = TemplateTextIcon.bind({});

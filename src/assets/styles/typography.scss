@@ -1,0 +1,61 @@
+@mixin roboto-font {
+  font-family: 'Roboto Serif', serif;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@mixin h1 {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+@mixin h2 {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 23px;
+}
+
+@mixin h3 {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+@mixin h4 {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+@mixin h5 {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+@mixin description {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@mixin bodySmall {
+  @include roboto-font;
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}

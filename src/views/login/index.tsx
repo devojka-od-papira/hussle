@@ -4,6 +4,7 @@ import SignIn from '../../components/signIn';
 import SignUp from '../../components/signUp';
 
 import styles from './Login.module.scss';
+import Typography from '../../components/typography';
 
 const Login = () => {
   const [isActive, setIsActive] = useState(0);
@@ -16,8 +17,12 @@ const Login = () => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.buttonWrapper}>
-            <Button onClick={() => handleClick(0)} className={styles.button}>Sign in</Button>
-            <Button onClick={() => handleClick(1)} className={styles.button}>Sign up</Button>
+            <Button onClick={() => handleClick(0)} className={styles.button}>
+              <Typography variant="h2">Sign in</Typography>
+            </Button>
+            <Button onClick={() => handleClick(1)} className={styles.button}>
+              <Typography variant="h2">Sign up</Typography>
+            </Button>
           </div>
           <div>
             <div className={styles.hr} style={{ transform: `translateX(${isActive < 2 ? isActive * 150 : 0}px)` }} />
