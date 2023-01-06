@@ -5,9 +5,9 @@ import Typography from '../typography';
 import styles from './PriorityTag.module.scss';
 
 export enum Priority {
-  Low='Low',
-  Med = 'Med',
-  High = 'High'
+  LOW = 'Low',
+  MED = 'Med',
+  HIGH = 'High'
 }
 
 interface PriorityTagProps {
@@ -16,15 +16,13 @@ interface PriorityTagProps {
 
 const PriorityTag:React.FC<PriorityTagProps> = ({ priority }) => (
   <div className={cx(styles.tag, {
-    [styles.low]: priority === Priority.Low,
-    [styles.med]: priority === Priority.Med,
-    [styles.high]: priority === Priority.High,
+    [styles.low]: priority === Priority.LOW,
+    [styles.med]: priority === Priority.MED,
+    [styles.high]: priority === Priority.HIGH,
   })}
   >
     <Typography variant="span">
-      {priority}
-      {' '}
-      Priority
+      {`${priority} Priority`}
     </Typography>
   </div>
 );

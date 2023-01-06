@@ -8,15 +8,15 @@ export default {
 } as ComponentMeta<typeof PriorityTag>;
 
 const TemplateLow: ComponentStory<typeof PriorityTag> = (args) => (
-  <PriorityTag priority={Priority.Low} />
+  <PriorityTag priority={Priority.LOW} />
 );
 
 const TemplateMedium: ComponentStory<typeof PriorityTag> = (args) => (
-  <PriorityTag priority={Priority.Med} />
+  <PriorityTag priority={Priority.MED} />
 );
 
 const TemplateHigh: ComponentStory<typeof PriorityTag> = (args) => (
-  <PriorityTag priority={Priority.High} />
+  <PriorityTag priority={Priority.HIGH} />
 );
 
 export const PriorityTagLow = TemplateLow.bind({});
