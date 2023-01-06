@@ -16,9 +16,9 @@ interface PriorityTagProps {
 
 const PriorityTag:React.FC<PriorityTagProps> = ({ children }) => (
   <div className={cx(styles.tag, {
-    [styles.low]: children === 'Low',
-    [styles.med]: children === 'Med',
-    [styles.high]: children === 'High',
+    [styles.low]: children === Priority.Low,
+    [styles.med]: children === Priority.Med,
+    [styles.high]: children === Priority.High,
   })}
   >
     <Typography variant="span">
