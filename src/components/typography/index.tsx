@@ -18,7 +18,7 @@ export enum TextType {
 type TextOptions<T = boolean> = { [key in keyof typeof TextType]: T };
 interface TypographyProps {
   variant: Variant;
-  children: string;
+  children: string | string[];
   className?: string;
   type?: TextType
 }
