@@ -4,14 +4,20 @@ import Typography from '../typography';
 
 import styles from './PriorityTag.module.scss';
 
+export enum Priority {
+  Low='Low',
+  Med = 'Med',
+  High = 'High'
+}
+
 interface PriorityTagProps {
-  children: string;
+  children: Priority;
 }
 
 const PriorityTag:React.FC<PriorityTagProps> = ({ children }) => (
   <div className={cx(styles.tag, {
     [styles.low]: children === 'Low',
-    [styles.medium]: children === 'Medium',
+    [styles.med]: children === 'Med',
     [styles.high]: children === 'High',
   })}
   >

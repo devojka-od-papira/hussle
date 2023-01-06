@@ -6,7 +6,7 @@ import ForgetPassword from '../forgetPassword';
 
 import styles from './SignIn.module.scss';
 import Typography from '../typography';
-import PriorityTag from '../priorityTag';
+import PriorityTag, { Priority } from '../priorityTag';
 
 interface SignInProps {
   isActive: number;
@@ -19,6 +19,7 @@ const SignIn:React.FC<SignInProps> = ({ isActive, setIsActive }) => {
 
   return isActive === 0 ? (
     <div className={cx(styles.signIn)}>
+      <PriorityTag>{Priority.High}</PriorityTag>
       <Input placeholder="User name" id="user" type="text" />
       <Input placeholder="Password" id="pass" type="password" />
       <Button onClick={submit} className={cx(styles.buttonColor)}>
