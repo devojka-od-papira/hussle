@@ -11,18 +11,18 @@ export enum Priority {
 }
 
 interface PriorityTagProps {
-  children: Priority;
+  priority: Priority;
 }
 
-const PriorityTag:React.FC<PriorityTagProps> = ({ children }) => (
+const PriorityTag:React.FC<PriorityTagProps> = ({ priority }) => (
   <div className={cx(styles.tag, {
-    [styles.low]: children === Priority.Low,
-    [styles.med]: children === Priority.Med,
-    [styles.high]: children === Priority.High,
+    [styles.low]: priority === Priority.Low,
+    [styles.med]: priority === Priority.Med,
+    [styles.high]: priority === Priority.High,
   })}
   >
     <Typography variant="span">
-      {children}
+      {priority}
       {' '}
       Priority
     </Typography>
