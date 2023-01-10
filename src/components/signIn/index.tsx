@@ -6,7 +6,6 @@ import ForgetPassword from '../forgetPassword';
 
 import styles from './SignIn.module.scss';
 import Typography from '../typography';
-import PriorityTag, { Priority } from '../priorityTag';
 
 interface SignInProps {
   isActive: number;
