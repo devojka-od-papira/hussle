@@ -1,0 +1,43 @@
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  top:0;
+  width: 120px;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 26px;
+  background-color: white;
+  filter: drop-shadow(0px 2px 8px #C9D1DE );
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  background-color: #888fdb;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-transform: none;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.iconSetting {
+  color: gray;
+  padding-top: 10px;
+}
