@@ -1,0 +1,74 @@
+.card {
+  width: 260px;
+  background-color: lightyellow;
+}
+
+.priorityTag {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 13px;
+}
+
+.description {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 14px;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.rightWrapper {
+  display: flex;
+  padding-bottom: 10px;
+  .addIcon {
+    padding-right: 10px;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.buttonDotted {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px dashed gray;
+  text-align: center;
+}
+
+.leftWrapper {
+  display: flex;
+}
+
+.numberIcon {
+  color: gray;
+  font-size: 12px;
+  padding-left: 3px;
+}
+
+.buttonCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid  #9B9B9B;
+  text-align: center;
+  background-color:  #9B9B9B;
+}
+
+
