@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Button from '../../components/button';
 import SignIn from '../../components/signIn';
 import SignUp from '../../components/signUp';
+import Typography from '../../components/typography';
 
 import styles from './Login.module.scss';
-import Typography from '../../components/typography';
 
 const Login = () => {
   const [isActive, setIsActive] = useState(0);
