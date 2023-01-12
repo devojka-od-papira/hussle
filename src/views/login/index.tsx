@@ -11,7 +11,6 @@ const Login = () => {
   const handleClick = (status : number) => {
     setIsActive(status);
   };
-
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>

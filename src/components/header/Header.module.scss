@@ -1,0 +1,53 @@
+@import "src/assets/styles/typography";
+
+.wrapper {
+  padding: 23px 23px;
+  background: linear-gradient(90deg, #9EA7FC 0%, #65B6F7 124.87%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.userWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  padding:0 0 0 11px;
+  border-radius: unset;
+  background-color: transparent;
+  margin-bottom: 0;
+  color: white;
+}
+
+.searchInput::placeholder {
+  @include h5;
+  color: white;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.buttonCircle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid  #9B9B9B;
+  text-align: center;
+  background-color:  #9B9B9B;
+}
+
+.user {
+  color: white;
+  margin-right: 22px;
+}
