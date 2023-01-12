@@ -5,7 +5,6 @@ import SignUp from '../../components/signUp';
 import Typography from '../../components/typography';
 
 import styles from './Login.module.scss';
-import Header from '../../components/header';
 
 const Login = () => {
   const [isActive, setIsActive] = useState(0);
