@@ -5,13 +5,13 @@ import SignUp from '../../components/signUp';
 import Typography from '../../components/typography';
 
 import styles from './Login.module.scss';
+import Header from '../../components/header';
 
 const Login = () => {
   const [isActive, setIsActive] = useState(0);
   const handleClick = (status : number) => {
     setIsActive(status);
   };
-
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>
