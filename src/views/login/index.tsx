@@ -24,9 +24,15 @@ const Login = () => {
             </Button>
           </div>
           <div>
-            <div className={styles.hr} style={{ transform: `translateX(${isActive < 2 ? isActive * 150 : 0}px)` }} />
+            <div
+              className={styles.hr}
+              style={{ transform: `translateX(${isActive < 2 ? isActive * 150 : 0}px)` }}
+            />
           </div>
-          <div className={styles.loginForm} style={{ transform: `rotateY(${isActive < 2 ? isActive * 180 : 0}deg)` }}>
+          <div
+            className={styles.loginForm}
+            style={{ transform: `rotateY(${isActive < 2 ? isActive * 180 : 0}deg)` }}
+          >
             <SignIn isActive={isActive} setIsActive={() => setIsActive(2)} />
             <SignUp setIsActive={() => setIsActive(0)} />
           </div>

@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(#181818FF, 0.7);
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  width: 500px;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.content {
+  background-color: white;
+  box-sizing: border-box;
+  padding: 20px;
+  min-height: 200px;
+}
