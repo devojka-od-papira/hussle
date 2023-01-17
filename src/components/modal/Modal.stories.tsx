@@ -21,12 +21,12 @@ const Template : ComponentStory<typeof Modal> = (args) => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className={styles.wrapper}>
+    <>
       <button className={styles.button} type="button" onClick={handleOpen}>Open modal</button>
       <Modal {...args} handleClose={handleOpen} isOpen={isOpen}>
         {children}
       </Modal>
-    </div>
+    </>
   );
 };
 export const ModalOpen = Template.bind({});
