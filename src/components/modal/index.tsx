@@ -11,7 +11,7 @@ interface ModalProps {
 }
 const Modal: FC<ModalProps> = ({ isOpen, handleClose, children }) => (isOpen ? (
   <div className={styles.wrapper} onClick={handleClose} onKeyDown={handleClose}>
-    <div>
+    <div className={styles.modal}>
       <div className={styles.header}>
         <Typography variant="h2" type={TextType.Heading2}>Title</Typography>
         <X onClick={handleClose} size={20} color="gray" />

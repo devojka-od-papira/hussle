@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { X } from 'react-feather';
-import Typography, { TextType } from '../typography';
 import Modal from './index';
 
-import styles from './Modal.module.scss';
+import styles from './Modal.stories.module.scss';
 
 export default {
   title: 'Component/Modal',
@@ -22,10 +20,17 @@ const Template : ComponentStory<typeof Modal> = (args) => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
-  return isOpen ? <Modal {...args} handleClose={handleOpen} isOpen={isOpen}>{children}</Modal> : <button type="button" onClick={handleOpen}>Open modal</button>;
+  return (
+    <div className={styles.wrapper}>
+      <button className={styles.button} type="button" onClick={handleOpen}>Open modal</button>
+      <Modal {...args} handleClose={handleOpen} isOpen={isOpen}>
+        {children}
+      </Modal>
+    </div>
+  );
 };
 export const ModalOpen = Template.bind({});
 
 ModalOpen.args = {
-  children: 'hello',
+  children: 'Hello',
 };
