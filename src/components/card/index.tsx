@@ -10,7 +10,7 @@ import Button from '../button';
 
 import styles from './Card.module.scss';
 
-interface CardProps {
+export interface CardProps {
   priority: Priority;
   description: string;
   attachmentNumber: number;

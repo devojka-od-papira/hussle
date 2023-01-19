@@ -3,10 +3,3 @@ export enum Priority {
   MED = 'Med',
   HIGH = 'High'
 }
-
-export type DataTypes = {
-  priority: Priority,
-  description: string,
-  attachmentNumber: number,
-  commentNumber: number,
-};

@@ -1,26 +1,26 @@
 import React, { FC } from 'react';
 import { PlusCircle } from 'react-feather';
 import Typography, { TextType } from '../typography';
-import { DataTypes } from '../../types/global';
-import Card from '../card';
+import Card, { CardProps } from '../card';
 import Button from '../button';
 import { randomHexColor } from '../../utils';
 
 import styles from './Column.module.scss';
 
 interface ColumnProps {
-  data : DataTypes[],
+  cardData : CardProps[],
+  title: string
 }
-const Column:FC<ColumnProps> = ({ data }) => {
-  const addedTask = () => {
+const Column:FC<ColumnProps> = ({ cardData, title }) => {
+  const addTask = () => {
     console.log('addTask');
   };
   const backgroundColor = randomHexColor();
   return (
     <div className={styles.column}>
       <div className={styles.divider} style={{ backgroundColor }} />
-      <Typography className={styles.title} variant="h3" type={TextType.Heading3}>Backlog</Typography>
-      {data.map((item, i) => (
+      <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
+      {cardData.map((item, i) => (
         <div key={i} className={styles.wrapperCard}>
           <Card
             priority={item.priority}
@@ -31,7 +31,7 @@ const Column:FC<ColumnProps> = ({ data }) => {
         </div>
       ))}
       <div className={styles.wrapperButton}>
-        <Button onClick={addedTask} className={styles.button}>
+        <Button onClick={addTask} className={styles.button}>
           <Typography variant="h4">
             Add task
           </Typography>
