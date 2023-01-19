@@ -9,6 +9,7 @@ import styles from './Login.module.scss';
 const Login = () => {
   const [isActive, setIsActive] = useState(0);
   const [isOpen, setIsOpen] = useState(true);
+
   const handleClick = (status : number) => {
     setIsActive(status);
   };
@@ -16,6 +17,7 @@ const Login = () => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>

@@ -3,18 +3,23 @@ import cx from 'classnames';
 import {
   MessageSquare, Paperclip, Plus, User,
 } from 'react-feather';
-import PriorityTag, { Priority } from '../priorityTag';
+import PriorityTag from '../priorityTag';
+import { Priority } from '../../types/global';
 import Typography from '../typography';
 import Button from '../button';
 
 import styles from './Card.module.scss';
 
-interface CardProps {
+export interface CardProps {
   priority: Priority;
   description: string;
+  attachmentNumber: number;
+  commentNumber: number;
 }
 
-const Card: FC<CardProps> = ({ priority, description }) => {
+const Card: FC<CardProps> = ({
+  priority, description, attachmentNumber, commentNumber,
+}) => {
   const handleClick = () => {
     console.log('click');
   };
@@ -31,13 +36,13 @@ const Card: FC<CardProps> = ({ priority, description }) => {
           <div>
             <Button onClick={handleClick} className={styles.button}>
               <MessageSquare color="gray" size={16} />
-              <Typography variant="p" className={styles.numberIcon}>3</Typography>
+              <Typography variant="p" className={styles.numberIcon}>{commentNumber}</Typography>
             </Button>
           </div>
           <div>
             <Button onClick={handleClick} className={styles.button}>
               <Paperclip color="gray" size={16} />
-              <Typography variant="p" className={styles.numberIcon}>3</Typography>
+              <Typography variant="p" className={styles.numberIcon}>{attachmentNumber}</Typography>
             </Button>
           </div>
         </div>

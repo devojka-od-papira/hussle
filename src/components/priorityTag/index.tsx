@@ -1,14 +1,9 @@
 import React from 'react';
 import cx from 'classnames';
 import Typography from '../typography';
+import { Priority } from '../../types/global';
 
 import styles from './PriorityTag.module.scss';
-
-export enum Priority {
-  LOW = 'Low',
-  MED = 'Med',
-  HIGH = 'High'
-}
 
 interface PriorityTagProps {
   priority: Priority;

@@ -32,5 +32,7 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+    'react/no-array-index-key': 'off',
   },
 };
