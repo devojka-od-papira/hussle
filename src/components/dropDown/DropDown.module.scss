@@ -1,0 +1,23 @@
+.dropDown {
+  position: absolute;
+  width: 260px;
+  box-shadow: 0 8px 16px -4px #fafafa,0 0 0 1px #fafafa;
+  border-radius: 5px;
+  background-color: white;
+  padding: 0 12px;
+}
+
+.wrapperTittle {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  border-bottom: 1px solid #d3d3d3 ;
+}
+
+.title {
+  margin: 0 auto;
+  color: gray;
+}

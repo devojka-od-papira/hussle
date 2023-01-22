@@ -4,7 +4,7 @@ import {
   MessageSquare, Paperclip, Plus, User,
 } from 'react-feather';
 import PriorityTag from '../priorityTag';
-import { Priority } from '../../types/global';
+import { Priority } from '../../constants';
 import Typography from '../typography';
 import Button from '../button';
 
