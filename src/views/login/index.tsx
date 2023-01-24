@@ -3,6 +3,7 @@ import Button from '../../components/button';
 import SignIn from '../../components/signIn';
 import SignUp from '../../components/signUp';
 import Typography from '../../components/typography';
+import { Priority } from '../../constants';
 
 import styles from './Login.module.scss';
 
@@ -17,7 +18,26 @@ const Login = () => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
-
+  const data = [
+    {
+      priority: Priority.LOW,
+      description: 'Company website redesign.',
+      attachmentNumber: 1,
+      commentNumber: 2,
+    },
+    {
+      priority: Priority.MED,
+      description: 'Mobile app login process prototype.',
+      attachmentNumber: 2,
+      commentNumber: 3,
+    },
+    {
+      priority: Priority.HIGH,
+      description: 'Work on company website.',
+      attachmentNumber: 1,
+      commentNumber: 3,
+    },
+  ];
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>

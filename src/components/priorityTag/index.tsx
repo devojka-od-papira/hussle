@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import Typography from '../typography';
-import { Priority } from '../../types/global';
+import { Priority } from '../../constants';
 
 import styles from './PriorityTag.module.scss';
 
