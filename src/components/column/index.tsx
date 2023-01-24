@@ -4,7 +4,6 @@ import { TwitterPicker } from 'react-color';
 import Typography, { TextType } from '../typography';
 import Card, { CardProps } from '../card';
 import Button from '../button';
-import { randomHexColor } from '../../utils';
 import DropDown from '../dropDown';
 
 import styles from './Column.module.scss';
@@ -14,22 +13,30 @@ interface ColumnProps {
   title: string,
 
 }
+export interface HEXColor {
+  hex: string;
+  source?: string | undefined;
+}
+
 const Column:FC<ColumnProps> = ({ cardData, title }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const [columnColor, setColumnColor] = useState('#2596be');
   const addTask = () => {
     console.log('addTask');
   };
-  const backgroundColor = randomHexColor();
   const handleDropDown = () => {
     setIsOpen(!isOpen);
+  };
+  const handleColorChange = (event:any) => {
+    setColumnColor(event.hex);
   };
 
   return (
     <div className={styles.column}>
-      <div className={styles.divider} style={{ backgroundColor }} />
+      <div className={styles.divider} style={{ backgroundColor: columnColor }} />
       <div className={styles.wrapperTittle}>
         <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
-        <div className={styles.dropDownWrapper} onClick={handleDropDown} onKeyDown={handleDropDown}>
+        <div className={styles.dropDownWrapper}>
           <Button onClick={handleDropDown}>
             <MoreHorizontal color="gray" size={20} />
           </Button>
@@ -39,7 +46,7 @@ const Column:FC<ColumnProps> = ({ cardData, title }) => {
                 <div className={styles.wrapperColor}>
                   <Typography className={styles.colorDescription} variant="h5" type={TextType.Heading5}>Choose a color...</Typography>
                   <div className={styles.colorPicker}>
-                    <TwitterPicker />
+                    <TwitterPicker onChange={handleColorChange} />
                   </div>
                 </div>
               </DropDown>
