@@ -5,6 +5,10 @@
   background: linear-gradient(90deg, #9EA7FC 0%, #65B6F7 124.87%);
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+  width: calc(100% - 120px);
 }
 
 .userWrapper {

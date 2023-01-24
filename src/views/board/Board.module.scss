@@ -1,0 +1,20 @@
+.container {
+  background-color: #9EA7FC;
+  position: relative;
+}
+
+.wrapper {
+  background-color: #7ED492;
+  box-sizing: border-box;
+  padding: 30px 50px;
+  width: calc(100% - 120px);
+  position: absolute;
+  display: inline-block;
+  flex-direction: column;
+}
+
+.inner {
+  background-color: #E57373;
+  display: flex;
+  justify-content: space-between;
+}
