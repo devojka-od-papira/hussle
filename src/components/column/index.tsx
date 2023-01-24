@@ -13,7 +13,6 @@ interface ColumnProps {
   title: string,
 
 }
-
 const Column:FC<ColumnProps> = ({ cardData, title }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [columnColor, setColumnColor] = useState('#2596be');
