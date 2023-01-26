@@ -33,11 +33,11 @@ const SignUp:React.FC<SignUpProps> = ({ setIsActive }) => {
 
   return (
     <div className={cx(styles.signUp)}>
-      <Input placeholder="Name" onChange={(e: any) => setName(e.target.value)} id="user" type="text" />
-      <Input placeholder="Last name" onChange={(e:any) => setLastName(e.target.value)} id="user" type="text" />
-      <Input placeholder="Email" onChange={(e: any) => setEmail(e.target.value)} id="pass" type="text" />
-      <Input placeholder="Password" onChange={(e: any) => setPassword(e.target.value)} id="pass" type="password" />
-      <Input placeholder="Repeat Password" onChange={(e:any) => setRepeatPassword(e.target.value)} id="pass" type="password" />
+      <Input placeholder="Name" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} id="user" type="text" />
+      <Input placeholder="Last name" onChange={(e:React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value)} id="user" type="text" />
+      <Input placeholder="Email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} id="pass" type="text" />
+      <Input placeholder="Password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} id="pass" type="password" />
+      <Input placeholder="Repeat Password" onChange={(e:React.ChangeEvent<HTMLInputElement>) => setRepeatPassword(e.target.value)} id="pass" type="password" />
       <Button onClick={signUp} className={cx(styles.buttonColor)}>
         <Typography variant="h4">Sign up</Typography>
       </Button>

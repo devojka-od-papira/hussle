@@ -9,7 +9,7 @@ interface InputProps {
   type: string;
   icon?: ReactNode
   className?:string;
-  onChange?: (e : FormEvent<HTMLInputElement>) => void;
+  onChange?: (e : React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input:React.FC<InputProps> = ({
