@@ -14,7 +14,7 @@ interface ColumnProps {
 
 }
 const Column:FC<ColumnProps> = ({ cardData, title }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [columnColor, setColumnColor] = useState('#2596be');
   const addTask = () => {
     console.log('addTask');
