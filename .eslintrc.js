@@ -34,5 +34,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     'react/no-array-index-key': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
   },
 };
