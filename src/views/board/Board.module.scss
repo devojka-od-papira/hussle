@@ -1,20 +1,69 @@
 .container {
-  background-color: #9EA7FC;
   position: relative;
 }
 
 .wrapper {
-  background-color: #7ED492;
   box-sizing: border-box;
-  padding: 30px 50px;
+  padding: 30px 40px;
   width: calc(100% - 120px);
   position: absolute;
-  display: inline-block;
-  flex-direction: column;
+  margin-left: 120px;
+  margin-top: 76px;
+  background-color: #faf7f7;
 }
 
 .inner {
-  background-color: #E57373;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.buttonCircle {
+  border-radius: 50%;
+  border: 1px solid  #9B9B9B;
+  background-color:  #9B9B9B;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user {
+  color: white;
+  margin-right: 22px;
+}
+
+.buttonDotted {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px dashed #9B9B9B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.columnsWrapper {
+  padding-top: 30px;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.columnWrapper {
+  background-color: #faf7f7;
+  margin-right: 40px;
+  margin-left: 2px;
+  margin-bottom: 2px;
+  height: 100%;
+  max-height: calc(100vh - 200px);
+  overflow-y: scroll;
+  box-shadow: 0px 0px 10px #D2D7E0;
+  border-radius: 5px;
 }

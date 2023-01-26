@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  background-color: #faf7f7;
 }
 
 .title {
@@ -39,6 +40,8 @@
   background-color: #9EA7FC;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  position: sticky;
+  top: 0;
 }
 
 .wrapperTittle {
@@ -46,12 +49,13 @@
   align-items: center;
   justify-content: space-between;
   button:hover {
-    background-color: lightyellow;
+    background-color: lightgray;
   }
 }
 
 .dropDownWrapper {
   position: relative;
+  margin-right: 15px;
 }
 
 .colorWrapper {
