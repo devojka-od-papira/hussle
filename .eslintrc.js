@@ -35,5 +35,6 @@ module.exports = {
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     'react/no-array-index-key': 'off',
     'react/jsx-no-constructed-context-values': 'off',
+    'jsx-a11y/interactive-supports-focus': 'off',
   },
 };

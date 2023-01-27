@@ -10,14 +10,21 @@ interface ProviderProps {
 }
 const Provider:FC<ProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userUID, setUserUID] = useState<string>('');
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => { console.log('userContex', user); });
+    onAuthStateChanged(auth, (user) => {
+      console.log('userContex', user?.uid);
+      if (user?.uid) {
+        setUserUID(user?.uid);
+      }
+    });
   }, []);
 
   return (
     <Context.Provider value={{
       currentUser,
+      userUID,
     }}
     >
       {children}

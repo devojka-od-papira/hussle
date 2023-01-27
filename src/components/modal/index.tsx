@@ -8,15 +8,30 @@ interface ModalProps {
   isOpen: boolean;
   handleClose: () => void;
   children: ReactNode;
+  title: string;
 }
-const Modal: FC<ModalProps> = ({ isOpen, handleClose, children }) => (isOpen ? (
-  <div className={styles.wrapper} onClick={handleClose} onKeyDown={handleClose}>
-    <div className={styles.modal}>
+
+function disabledEventPropagation(event: React.SyntheticEvent) {
+  if (event.stopPropagation) {
+    event.stopPropagation();
+  }
+}
+const Modal: FC<ModalProps> = ({
+  isOpen, handleClose, children, title,
+}) => (isOpen ? (
+  <div role="button" tabIndex={0} className={styles.wrapper} onClick={handleClose} onKeyDown={handleClose}>
+    <div
+      onKeyDown={disabledEventPropagation}
+      onClick={disabledEventPropagation}
+      className={styles.modal}
+    >
       <div className={styles.header}>
-        <Typography variant="h2" type={TextType.Heading2}>Title</Typography>
+        <Typography variant="h2" type={TextType.Heading2}>{title}</Typography>
         <X onClick={handleClose} size={20} color="gray" />
       </div>
-      <div className={styles.content}>
+      <div
+        className={styles.content}
+      >
         {children}
       </div>
     </div>
