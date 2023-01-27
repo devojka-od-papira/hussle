@@ -29,8 +29,8 @@ const SignIn:React.FC<SignInProps> = ({ isActive, setIsActive }) => {
 
   return isActive === 0 ? (
     <div className={cx(styles.signIn)}>
-      <Input placeholder="Email" onChange={(e : React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} id="user" type="text" />
-      <Input placeholder="Password" onChange={(e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} id="pass" type="password" />
+      <Input placeholder="Email" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} id="user" type="text" />
+      <Input placeholder="Password" onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} id="pass" type="password" />
       <Button onClick={signIn} className={cx(styles.buttonColor)}>
         <Typography variant="h4">Sign in</Typography>
       </Button>
