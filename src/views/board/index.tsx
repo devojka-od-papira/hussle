@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import {
+  collection, addDoc, getDocs, setDoc, doc,
+} from 'firebase/firestore';
 import { Plus, User } from 'react-feather';
 import { db } from '../../db';
 import Header from '../../components/header';
@@ -19,6 +21,7 @@ interface ColumnProps {
   title: string;
   tasks: [];
   color: string;
+  id: string;
 }
 
 const Board = () => {
@@ -43,10 +46,10 @@ const Board = () => {
         title: columnName,
         tasks: [],
         color: '#2596be',
+        id: docRef.id,
       },
       ]);
       setOpen(false);
-      console.log('docRef', docRef);
     } catch (error) {
       console.log('error', error);
     }
@@ -54,17 +57,33 @@ const Board = () => {
 
   useEffect(() => {
     getDocs(collection(db, 'columns')).then((response) => {
-      console.log('response', response.docs);
-      const columns = response.docs.map((column) => {
-        console.log('column', column.data());
-        return column.data();
-      });
-      console.log('colon', columns);
+      const columns = response.docs.map((column) => ({
+        ...column.data(),
+        id: column.id,
+      }));
       setColumns(columns);
     }).catch((error) => {
       console.log('error', error);
     });
   }, []);
+
+  const updateColor = (hex:string, id: string, title: string, tasks: []) => {
+    const docRef = doc(db, 'columns', id);
+    const data = {
+      title,
+      tasks,
+      color: hex,
+    };
+    setDoc(docRef, data).then((response) => {
+      const newColumns = columns.map((column: any) => {
+        if (column.id === id) {
+          return { ...column, color: hex };
+        }
+        return column;
+      });
+      setColumns(newColumns);
+    });
+  };
 
   const cardData = [
     {
@@ -104,9 +123,16 @@ const Board = () => {
           </div>
         </div>
         <div className={styles.columnsWrapper}>
-          {columns.map((column:ColumnProps, i: number) => (
-            <div key={i} className={styles.columnWrapper}>
-              <Column cardData={column.tasks} title={column.title} />
+          {columns.map((column:ColumnProps) => (
+            <div key={column.id} className={styles.columnWrapper}>
+              <Column
+                id={column.id}
+                tasks={column.tasks}
+                cardData={column.tasks}
+                title={column.title}
+                color={column.color}
+                updateColor={updateColor}
+              />
             </div>
           ))}
           <div className={styles.innerButton}>

@@ -8,27 +8,34 @@ import DropDown from '../dropDown';
 
 import styles from './Column.module.scss';
 
-interface ColumnProps {
-  cardData: CardProps[],
-  title: string,
-
+interface ColorPickerEvent {
+  hex: string;
 }
-const Column:FC<ColumnProps> = ({ cardData, title }) => {
+
+interface ColumnData {
+  id: string;
+  title: string;
+  tasks: [];
+  color: string;
+}
+interface ColumnProps extends ColumnData{
+  cardData: CardProps[];
+  updateColor: (hex: string, id: string, title: string, tasks: []) => void;
+}
+const Column:FC<ColumnProps> = ({
+  cardData, title, id, color, updateColor, tasks,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [columnColor, setColumnColor] = useState('#2596be');
   const addTask = () => {
     console.log('addTask');
   };
   const handleDropDown = () => {
     setIsOpen(!isOpen);
   };
-  const handleColorChange = (event:any) => {
-    setColumnColor(event.hex);
-  };
 
   return (
     <div className={styles.column}>
-      <div className={styles.divider} style={{ backgroundColor: columnColor }} />
+      <div className={styles.divider} style={{ backgroundColor: color }} />
       <div className={styles.wrapperTittle}>
         <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
         <div className={styles.dropDownWrapper}>
@@ -41,7 +48,9 @@ const Column:FC<ColumnProps> = ({ cardData, title }) => {
                 <div className={styles.wrapperColor}>
                   <Typography className={styles.colorDescription} variant="h5" type={TextType.Heading5}>Choose a color...</Typography>
                   <div className={styles.colorPicker}>
-                    <TwitterPicker onChange={handleColorChange} />
+                    <TwitterPicker
+                      onChange={(e: ColorPickerEvent) => updateColor(e.hex, id, title, tasks)}
+                    />
                   </div>
                 </div>
               </DropDown>
