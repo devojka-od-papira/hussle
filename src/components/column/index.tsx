@@ -8,14 +8,19 @@ import DropDown from '../dropDown';
 
 import styles from './Column.module.scss';
 
-interface ColumnProps {
-  cardData: CardProps[];
-  title: string;
-  color: string;
-  id: string;
-  updateColor: (hex: string, id: string, title: string, tasks: []) => void;
-  tasks: [];
+interface ColorPickerEvent {
+  hex: string;
+}
 
+interface ColumnData {
+  id: string;
+  title: string;
+  tasks: [];
+  color: string;
+}
+interface ColumnProps extends ColumnData{
+  cardData: CardProps[];
+  updateColor: (hex: string, id: string, title: string, tasks: []) => void;
 }
 const Column:FC<ColumnProps> = ({
   cardData, title, id, color, updateColor, tasks,
@@ -43,7 +48,9 @@ const Column:FC<ColumnProps> = ({
                 <div className={styles.wrapperColor}>
                   <Typography className={styles.colorDescription} variant="h5" type={TextType.Heading5}>Choose a color...</Typography>
                   <div className={styles.colorPicker}>
-                    <TwitterPicker onChange={(e: any) => updateColor(e.hex, id, title, tasks)} />
+                    <TwitterPicker
+                      onChange={(e: ColorPickerEvent) => updateColor(e.hex, id, title, tasks)}
+                    />
                   </div>
                 </div>
               </DropDown>
