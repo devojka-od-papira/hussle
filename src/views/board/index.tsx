@@ -25,10 +25,13 @@ interface ColumnProps {
 }
 
 const Board = () => {
+  const context = useContext(Context);
   const [open, setOpen] = useState(false);
+  const [openTaskModal, setOpenTaskModal] = useState(false);
   const [columnName, setColumnName] = useState('');
   const [columns, setColumns] = useState<any>([]);
-  const context = useContext(Context);
+  const [descriptionCard, setDescriptionCard] = useState('');
+  const [columnId, setColumnId] = useState('');
   const handleClick = () => {
     console.log('user');
   };
@@ -84,27 +87,30 @@ const Board = () => {
       setColumns(newColumns);
     });
   };
-
-  const cardData = [
-    {
+  const handleAddTaskModal = (id: string) => {
+    setOpenTaskModal(!openTaskModal);
+    setColumnId(id);
+  };
+  const createCard = () => {
+    const docRef = doc(db, 'columns', columnId);
+    const data = {
       priority: Priority.LOW,
-      description: 'Company website redesign.',
-      attachmentNumber: 3,
-      commentNumber: 1,
-    },
-    {
-      priority: Priority.MED,
-      description: 'Company website redesign.',
+      description: descriptionCard,
       attachmentNumber: 2,
-      commentNumber: 3,
-    },
-    {
-      priority: Priority.HIGH,
-      description: 'Company website redesign.',
-      attachmentNumber: 1,
       commentNumber: 2,
-    },
-  ];
+    };
+    const columnToBeUpdate = columns.find((column: any) => columnId === column.id);
+    columnToBeUpdate.tasks.push(data);
+    setDoc(docRef, columnToBeUpdate).then((response) => {
+      const newColumns = columns.map((column: any) => {
+        if (column.id === columnToBeUpdate.id) {
+          return columnToBeUpdate;
+        }
+        return column;
+      });
+      setColumns(newColumns);
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -132,6 +138,7 @@ const Board = () => {
                 title={column.title}
                 color={column.color}
                 updateColor={updateColor}
+                handleAddTaskModal={handleAddTaskModal}
               />
             </div>
           ))}
@@ -147,11 +154,23 @@ const Board = () => {
           placeholder="Enter column name..."
           id="text"
           type="text"
-          className={styles.columnNameInput}
+          className={styles.modalInput}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}
         />
-        <Button onClick={addColumnName} className={styles.addColumnNameButton}>
+        <Button onClick={addColumnName} className={styles.modalButton}>
           ADD COLUMN
+        </Button>
+      </Modal>
+      <Modal isOpen={openTaskModal} handleClose={() => handleAddTaskModal('')} title="Create card">
+        <Input
+          placeholder="Enter description card"
+          id="card"
+          type="text"
+          className={styles.modalInput}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescriptionCard(e.target.value)}
+        />
+        <Button onClick={createCard} className={styles.modalButton}>
+          Create card
         </Button>
       </Modal>
     </div>

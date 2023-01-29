@@ -21,14 +21,12 @@ interface ColumnData {
 interface ColumnProps extends ColumnData{
   cardData: CardProps[];
   updateColor: (hex: string, id: string, title: string, tasks: []) => void;
+  handleAddTaskModal: (id: string) => void;
 }
 const Column:FC<ColumnProps> = ({
-  cardData, title, id, color, updateColor, tasks,
+  cardData, title, id, color, updateColor, tasks, handleAddTaskModal,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const addTask = () => {
-    console.log('addTask');
-  };
   const handleDropDown = () => {
     setIsOpen(!isOpen);
   };
@@ -68,7 +66,7 @@ const Column:FC<ColumnProps> = ({
         </div>
       ))}
       <div className={styles.wrapperButton}>
-        <Button onClick={addTask} className={styles.button}>
+        <Button onClick={() => handleAddTaskModal(id)} className={styles.button}>
           <Typography variant="h4">
             Add task
           </Typography>
