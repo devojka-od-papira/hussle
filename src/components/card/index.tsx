@@ -18,10 +18,11 @@ export interface CardProps {
   description: string;
   attachmentNumber: number;
   commentNumber: number;
+  editTask: () => void;
 }
 
 const Card: FC<CardProps> = ({
-  priority, description, attachmentNumber, commentNumber,
+  priority, description, attachmentNumber, commentNumber, editTask,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -82,7 +83,18 @@ const Card: FC<CardProps> = ({
         </div>
       </div>
       <Modal isOpen={isOpenModal} handleClose={handleModal} title="Edit task">
-        <Input placeholder="Edit task..." id="edit" type="text" className={styles.modalInput} />
+        <Input
+          id="edit"
+          type="text"
+          placeholder="Edit task..."
+          className={styles.modalInput}
+        />
+        <Button
+          onClick={editTask}
+          className={styles.modalButton}
+        >
+          EDIT
+        </Button>
       </Modal>
     </>
   );

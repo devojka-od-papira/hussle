@@ -7,9 +7,17 @@ import Button from '../button';
 import DropDown from '../dropDown';
 
 import styles from './Column.module.scss';
+import { Priority } from '../../constants';
 
 interface ColorPickerEvent {
   hex: string;
+}
+
+type TaksType = {
+  priority: Priority;
+  description: string;
+  attachmentNumber: number;
+  commentNumber: number;
 }
 
 interface ColumnData {
@@ -18,17 +26,19 @@ interface ColumnData {
   color: string;
 }
 interface ColumnProps extends ColumnData {
-  tasks: CardProps[];
-  updateColor: (hex: string, id: string, title: string, tasks: CardProps[]) => void;
+  tasks: TaksType[];
+  updateColor: (hex: string, id: string, title: string, tasks: TaksType[]) => void;
   handleAddTaskModal: (id: string) => void;
+  editTask: () => void;
+
 }
 const Column:FC<ColumnProps> = ({
-  tasks, title, id, color, updateColor, handleAddTaskModal,
+  tasks, title, id, color, updateColor, handleAddTaskModal, editTask,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleDropDown = () => {
     setIsOpen(!isOpen);
-  };
+  }
 
   return (
     <div className={styles.column}>
@@ -61,6 +71,7 @@ const Column:FC<ColumnProps> = ({
             description={item.description}
             attachmentNumber={item.attachmentNumber}
             commentNumber={item.commentNumber}
+            editTask={editTask}
           />
         </div>
       ))}

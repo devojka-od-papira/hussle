@@ -16,13 +16,19 @@ import { Context } from '../../context';
 import Input from '../../components/input';
 import Checkbox from '../../components/checkbox';
 import PriorityTag from '../../components/priorityTag';
-import { CardProps } from '../../components/card';
 
 import styles from './Board.module.scss';
 
+export type TaskType = {
+  priority: Priority;
+  description: string;
+  attachmentNumber: number;
+  commentNumber: number;
+}
+
 type ColumnType = {
   title: string;
-  tasks: CardProps[];
+  tasks: TaskType[];
   color: string;
   id: string;
 }
@@ -83,7 +89,7 @@ const Board = () => {
     });
   }, []);
 
-  const updateColor = (hex:string, id: string, title: string, tasks: CardProps[]) => {
+  const updateColor = (hex:string, id: string, title: string, tasks: TaskType[]) => {
     const docRef = doc(db, 'columns', id);
     const data = {
       title,
@@ -134,6 +140,9 @@ const Board = () => {
     [Priority.MED]: styles.med,
     [Priority.HIGH]: styles.high,
   };
+  const editTask = () => {
+    console.log('edit');
+  };
   return (
     <div className={styles.container}>
       <Header />
@@ -160,6 +169,7 @@ const Board = () => {
                 color={column.color}
                 handleAddTaskModal={handleAddTaskModal}
                 updateColor={updateColor}
+                editTask={editTask}
               />
             </div>
           ))}
