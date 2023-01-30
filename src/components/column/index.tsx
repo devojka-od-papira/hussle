@@ -36,7 +36,7 @@ const Column:FC<ColumnProps> = ({
       <div className={styles.wrapperTittle}>
         <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
         <div className={styles.dropDownWrapper}>
-          <Button onClick={handleDropDown}>
+          <Button onClick={handleDropDown} className={styles.buttonHover}>
             <MoreHorizontal color="gray" size={20} />
           </Button>
           {isOpen
