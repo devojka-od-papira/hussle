@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { X } from 'react-feather';
+import cx from 'classnames';
 import Typography, { TextType } from '../typography';
 
 import styles from './Modal.module.scss';
@@ -9,6 +10,7 @@ interface ModalProps {
   handleClose: () => void;
   children: ReactNode;
   title: string;
+  className?: string;
 }
 
 function disabledEventPropagation(event: React.SyntheticEvent) {
@@ -17,7 +19,7 @@ function disabledEventPropagation(event: React.SyntheticEvent) {
   }
 }
 const Modal: FC<ModalProps> = ({
-  isOpen, handleClose, children, title,
+  isOpen, handleClose, children, title, className,
 }) => (isOpen ? (
   <div role="button" tabIndex={0} className={styles.wrapper} onClick={handleClose} onKeyDown={handleClose}>
     <div
@@ -30,7 +32,7 @@ const Modal: FC<ModalProps> = ({
         <X onClick={handleClose} size={20} color="gray" />
       </div>
       <div
-        className={styles.content}
+        className={cx(styles.content, className)}
       >
         {children}
       </div>

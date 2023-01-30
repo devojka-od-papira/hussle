@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
 import {
-  collection, addDoc, getDocs, setDoc, doc,
+  addDoc, collection, doc, getDocs, setDoc,
 } from 'firebase/firestore';
 import { Plus, User } from 'react-feather';
 import { db } from '../../db';
@@ -16,6 +16,8 @@ import { Context } from '../../context';
 import Input from '../../components/input';
 
 import styles from './Board.module.scss';
+import Checkbox from '../../components/checkbox';
+import PriorityTag from '../../components/priorityTag';
 
 interface ColumnProps {
   title: string;
@@ -32,6 +34,13 @@ const Board = () => {
   const [columns, setColumns] = useState<any>([]);
   const [descriptionCard, setDescriptionCard] = useState('');
   const [columnId, setColumnId] = useState('');
+  const [priority, setPriority] = useState(Priority.MED);
+
+  const priorityData = [
+    { priority: Priority.LOW },
+    { priority: Priority.MED },
+    { priority: Priority.HIGH },
+  ];
   const handleClick = () => {
     console.log('user');
   };
@@ -94,7 +103,7 @@ const Board = () => {
   const createCard = () => {
     const docRef = doc(db, 'columns', columnId);
     const data = {
-      priority: Priority.LOW,
+      priority,
       description: descriptionCard,
       attachmentNumber: 2,
       commentNumber: 2,
@@ -111,7 +120,14 @@ const Board = () => {
       setColumns(newColumns);
     });
   };
-
+  const handlePriorityChange = (priority: Priority) => {
+    setPriority(priority);
+  };
+  const colors = {
+    [Priority.LOW]: styles.low,
+    [Priority.MED]: styles.med,
+    [Priority.HIGH]: styles.high,
+  };
   return (
     <div className={styles.container}>
       <Header />
@@ -161,7 +177,7 @@ const Board = () => {
           ADD COLUMN
         </Button>
       </Modal>
-      <Modal isOpen={openTaskModal} handleClose={() => handleAddTaskModal('')} title="Create card">
+      <Modal isOpen={openTaskModal} handleClose={() => handleAddTaskModal('')} title="Create card" className={styles.modalContent}>
         <Input
           placeholder="Enter description card"
           id="card"
@@ -169,6 +185,26 @@ const Board = () => {
           className={styles.modalInput}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescriptionCard(e.target.value)}
         />
+        <div>
+          {priorityData.map((priorityItem: any) => (
+            <Checkbox
+              priority={priorityItem.priority}
+              handleChange={handlePriorityChange}
+              checked={priorityItem.priority === priority}
+              key={priorityItem.priority}
+              // @ts-ignore
+              className={colors[priorityItem.priority]}
+            >
+              <div className={styles.priorityTag}>
+                <PriorityTag
+                  // @ts-ignore
+                  className={colors[priorityItem.priority]}
+                  priority={priorityItem.priority}
+                />
+              </div>
+            </Checkbox>
+          ))}
+        </div>
         <Button onClick={createCard} className={styles.modalButton}>
           Create card
         </Button>
