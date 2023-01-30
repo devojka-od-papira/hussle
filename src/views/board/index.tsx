@@ -14,14 +14,15 @@ import Modal from '../../components/modal';
 import { Priority } from '../../constants';
 import { Context } from '../../context';
 import Input from '../../components/input';
-
-import styles from './Board.module.scss';
 import Checkbox from '../../components/checkbox';
 import PriorityTag from '../../components/priorityTag';
+import { CardProps } from '../../components/card';
 
-interface ColumnProps {
+import styles from './Board.module.scss';
+
+type ColumnType = {
   title: string;
-  tasks: [];
+  tasks: CardProps[];
   color: string;
   id: string;
 }
@@ -31,7 +32,7 @@ const Board = () => {
   const [open, setOpen] = useState(false);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const [columnName, setColumnName] = useState('');
-  const [columns, setColumns] = useState<any>([]);
+  const [columns, setColumns] = useState<ColumnType[]>([]);
   const [descriptionCard, setDescriptionCard] = useState('');
   const [columnId, setColumnId] = useState('');
   const [priority, setPriority] = useState(Priority.MED);
@@ -69,17 +70,20 @@ const Board = () => {
 
   useEffect(() => {
     getDocs(collection(db, 'columns')).then((response) => {
-      const columns = response.docs.map((column) => ({
-        ...column.data(),
-        id: column.id,
-      }));
+      const columns: ColumnType[] = response.docs.map((column) => {
+        const data = column.data() as ColumnType;
+        return {
+          ...data,
+          id: column.id,
+        };
+      });
       setColumns(columns);
     }).catch((error) => {
       console.log('error', error);
     });
   }, []);
 
-  const updateColor = (hex:string, id: string, title: string, tasks: []) => {
+  const updateColor = (hex:string, id: string, title: string, tasks: CardProps[]) => {
     const docRef = doc(db, 'columns', id);
     const data = {
       title,
@@ -87,7 +91,7 @@ const Board = () => {
       color: hex,
     };
     setDoc(docRef, data).then((response) => {
-      const newColumns = columns.map((column: any) => {
+      const newColumns = columns.map((column: ColumnType) => {
         if (column.id === id) {
           return { ...column, color: hex };
         }
@@ -108,11 +112,13 @@ const Board = () => {
       attachmentNumber: 2,
       commentNumber: 2,
     };
-    const columnToBeUpdate = columns.find((column: any) => columnId === column.id);
-    columnToBeUpdate.tasks.push(data);
+    const columnToBeUpdate = columns.find((column: ColumnType) => columnId === column.id);
+    const newCol = {
+      ...columnToBeUpdate, tasks: columnToBeUpdate?.tasks.push(data),
+    };
     setDoc(docRef, columnToBeUpdate).then((response) => {
-      const newColumns = columns.map((column: any) => {
-        if (column.id === columnToBeUpdate.id) {
+      const newColumns = columns.map((column:ColumnType) => {
+        if (column.id === columnToBeUpdate?.id) {
           return columnToBeUpdate;
         }
         return column;
@@ -145,21 +151,23 @@ const Board = () => {
           </div>
         </div>
         <div className={styles.columnsWrapper}>
-          {columns.map((column:ColumnProps) => (
+          {columns.map((column:ColumnType) => (
             <div key={column.id} className={styles.columnWrapper}>
               <Column
                 id={column.id}
-                tasks={column.tasks}
-                cardData={column.tasks}
                 title={column.title}
+                tasks={column.tasks}
                 color={column.color}
-                updateColor={updateColor}
                 handleAddTaskModal={handleAddTaskModal}
+                updateColor={updateColor}
               />
             </div>
           ))}
           <div className={styles.innerButton}>
-            <Button className={cx(styles.buttonPlusCircle)} onClick={handleModal}>
+            <Button
+              onClick={handleModal}
+              className={cx(styles.buttonPlusCircle)}
+            >
               <Plus color="white" size={20} />
             </Button>
           </div>
@@ -167,17 +175,25 @@ const Board = () => {
       </div>
       <Modal isOpen={open} handleClose={handleModal} title="Create column">
         <Input
-          placeholder="Enter column name..."
           id="text"
           type="text"
           className={styles.modalInput}
+          placeholder="Enter column name..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}
         />
-        <Button onClick={addColumnName} className={styles.modalButton}>
+        <Button
+          onClick={addColumnName}
+          className={styles.modalButton}
+        >
           ADD COLUMN
         </Button>
       </Modal>
-      <Modal isOpen={openTaskModal} handleClose={() => handleAddTaskModal('')} title="Create card" className={styles.modalContent}>
+      <Modal
+        title="Create card"
+        isOpen={openTaskModal}
+        className={styles.modalContent}
+        handleClose={() => handleAddTaskModal('')}
+      >
         <Input
           placeholder="Enter description card"
           id="card"
@@ -186,20 +202,18 @@ const Board = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescriptionCard(e.target.value)}
         />
         <div>
-          {priorityData.map((priorityItem: any) => (
+          {priorityData.map((priorityItem: {priority: Priority}) => (
             <Checkbox
+              key={priorityItem.priority}
               priority={priorityItem.priority}
               handleChange={handlePriorityChange}
               checked={priorityItem.priority === priority}
-              key={priorityItem.priority}
-              // @ts-ignore
               className={colors[priorityItem.priority]}
             >
               <div className={styles.priorityTag}>
                 <PriorityTag
-                  // @ts-ignore
-                  className={colors[priorityItem.priority]}
                   priority={priorityItem.priority}
+                  className={colors[priorityItem.priority]}
                 />
               </div>
             </Checkbox>
