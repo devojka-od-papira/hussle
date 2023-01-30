@@ -15,16 +15,15 @@ interface ColorPickerEvent {
 interface ColumnData {
   id: string;
   title: string;
-  tasks: [];
   color: string;
 }
-interface ColumnProps extends ColumnData{
-  cardData: CardProps[];
-  updateColor: (hex: string, id: string, title: string, tasks: []) => void;
+interface ColumnProps extends ColumnData {
+  tasks: CardProps[];
+  updateColor: (hex: string, id: string, title: string, tasks: CardProps[]) => void;
   handleAddTaskModal: (id: string) => void;
 }
 const Column:FC<ColumnProps> = ({
-  cardData, title, id, color, updateColor, tasks, handleAddTaskModal,
+  tasks, title, id, color, updateColor, handleAddTaskModal,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleDropDown = () => {
@@ -55,7 +54,7 @@ const Column:FC<ColumnProps> = ({
             )}
         </div>
       </div>
-      {cardData.map((item, i) => (
+      {tasks.map((item, i) => (
         <div key={i} className={styles.wrapperCard}>
           <Card
             priority={item.priority}

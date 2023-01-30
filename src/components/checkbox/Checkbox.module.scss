@@ -1,0 +1,54 @@
+.wrapperCheckbox {
+  display: flex;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.input {
+  margin-right: 10px;
+  width: 26px;
+  height: 23px;
+  outline: none;
+}
+
+.priorityTag {
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 13px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background-color: #b4b4cb;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.checkmark:hover {
+  background-color: #ccc;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.wrapperCheckbox .checkmark:after {
+  left: 12px;
+  top: 6px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
