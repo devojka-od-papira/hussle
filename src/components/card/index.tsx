@@ -1,17 +1,21 @@
-import React, { FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 import cx from 'classnames';
 import {
   Edit,
-  MessageSquare, Paperclip, Plus, Trash2, User,
+  MessageSquare,
+  Paperclip,
+  Plus,
+  Trash2,
+  User,
 } from 'react-feather';
 import PriorityTag from '../priorityTag';
 import { Priority } from '../../constants';
 import Typography from '../typography';
 import Button from '../button';
 import Modal from '../modal';
+import Input from '../input';
 
 import styles from './Card.module.scss';
-import Input from '../input';
 
 export interface CardProps {
   priority: Priority;
@@ -19,10 +23,26 @@ export interface CardProps {
   attachmentNumber: number;
   commentNumber: number;
   editTask: () => void;
+  handleChangeDescriptionTask: (description: string) => void;
+  descriptionCard: string;
+  handleColumnId: (id: string) => void;
+  columnId: string;
+  cardIndex: number;
+  handleCardIndex: (index: number) => void;
 }
 
 const Card: FC<CardProps> = ({
-  priority, description, attachmentNumber, commentNumber, editTask,
+  priority,
+  description,
+  attachmentNumber,
+  commentNumber,
+  editTask,
+  handleChangeDescriptionTask,
+  descriptionCard,
+  handleColumnId,
+  columnId,
+  cardIndex,
+  handleCardIndex,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isHover, setIsHover] = useState(false);
@@ -34,7 +54,9 @@ const Card: FC<CardProps> = ({
   };
   const handleModal = () => {
     setIsOpenModal(!isOpenModal);
-    console.log('kllkk');
+    handleChangeDescriptionTask(description);
+    handleColumnId(columnId);
+    handleCardIndex(cardIndex);
   };
   return (
     <>
@@ -88,6 +110,10 @@ const Card: FC<CardProps> = ({
           type="text"
           placeholder="Edit task..."
           className={styles.modalInput}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            handleChangeDescriptionTask(e.target.value);
+          }}
+          value={descriptionCard}
         />
         <Button
           onClick={editTask}

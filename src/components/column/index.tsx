@@ -2,18 +2,18 @@ import React, { FC, useState } from 'react';
 import { MoreHorizontal, PlusCircle } from 'react-feather';
 import { TwitterPicker } from 'react-color';
 import Typography, { TextType } from '../typography';
-import Card, { CardProps } from '../card';
+import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
+import { Priority } from '../../constants';
 
 import styles from './Column.module.scss';
-import { Priority } from '../../constants';
 
 interface ColorPickerEvent {
   hex: string;
 }
 
-type TaksType = {
+type TaskType = {
   priority: Priority;
   description: string;
   attachmentNumber: number;
@@ -24,21 +24,34 @@ interface ColumnData {
   id: string;
   title: string;
   color: string;
+  tasks: TaskType[];
 }
 interface ColumnProps extends ColumnData {
-  tasks: TaksType[];
-  updateColor: (hex: string, id: string, title: string, tasks: TaksType[]) => void;
+  updateColor: (hex: string, id: string, title: string, tasks: TaskType[]) => void;
   handleAddTaskModal: (id: string) => void;
   editTask: () => void;
-
+  handleChangeDescriptionTask: (description: string) => void;
+  descriptionCard: string;
+  handleColumnId: (id: string) => void;
+  handleCardIndex: (index: number) => void;
 }
 const Column:FC<ColumnProps> = ({
-  tasks, title, id, color, updateColor, handleAddTaskModal, editTask,
+  tasks,
+  title,
+  id,
+  color,
+  updateColor,
+  handleAddTaskModal,
+  editTask,
+  handleChangeDescriptionTask,
+  descriptionCard,
+  handleColumnId,
+  handleCardIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleDropDown = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   return (
     <div className={styles.column}>
@@ -72,6 +85,12 @@ const Column:FC<ColumnProps> = ({
             attachmentNumber={item.attachmentNumber}
             commentNumber={item.commentNumber}
             editTask={editTask}
+            handleChangeDescriptionTask={handleChangeDescriptionTask}
+            descriptionCard={descriptionCard}
+            handleColumnId={handleColumnId}
+            columnId={id}
+            cardIndex={i}
+            handleCardIndex={handleCardIndex}
           />
         </div>
       ))}

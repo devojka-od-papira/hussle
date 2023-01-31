@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
 import {
-  addDoc, collection, doc, getDocs, setDoc,
+  doc,
+  setDoc,
+  addDoc,
+  getDocs,
+  collection,
 } from 'firebase/firestore';
 import { Plus, User } from 'react-feather';
 import { db } from '../../db';
@@ -42,6 +46,7 @@ const Board = () => {
   const [descriptionCard, setDescriptionCard] = useState('');
   const [columnId, setColumnId] = useState('');
   const [priority, setPriority] = useState(Priority.MED);
+  const [cardIndex, setCardIndex] = useState(0);
 
   const priorityData = [
     { priority: Priority.LOW },
@@ -141,7 +146,42 @@ const Board = () => {
     [Priority.HIGH]: styles.high,
   };
   const editTask = () => {
-    console.log('edit');
+    const docRef = doc(db, 'columns', columnId);
+    const newColumn = columns.find((item) => item.id === columnId);
+    if (newColumn?.tasks) {
+      const newTasks = newColumn?.tasks.map((task, index) => {
+        if (index === cardIndex) {
+          return {
+            ...task, description: descriptionCard,
+          };
+        }
+        return task;
+      });
+      const data = { ...newColumn, tasks: newTasks };
+      setDoc(docRef, data).then((response) => {
+        const newColumns = columns.map((column) => {
+          if (column.id === columnId) {
+            return data;
+          }
+          return column;
+        });
+        setColumns(newColumns);
+      }).catch((error) => {
+        console.log('error', error);
+      });
+    }
+  };
+  const handleCardIndex = (index: number) => {
+    setCardIndex(index);
+  };
+
+  const handleColumnId = (id: string) => {
+    setColumnId(id);
+  };
+
+  const handleChangeDescriptionTask = (description: string) => {
+    console.log('description', description);
+    setDescriptionCard(description);
   };
   return (
     <div className={styles.container}>
@@ -170,6 +210,10 @@ const Board = () => {
                 handleAddTaskModal={handleAddTaskModal}
                 updateColor={updateColor}
                 editTask={editTask}
+                handleChangeDescriptionTask={handleChangeDescriptionTask}
+                descriptionCard={descriptionCard}
+                handleColumnId={handleColumnId}
+                handleCardIndex={handleCardIndex}
               />
             </div>
           ))}
