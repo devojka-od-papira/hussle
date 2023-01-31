@@ -48,9 +48,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  button:hover {
-    background-color: lightgray;
-  }
+}
+
+.buttonHover:hover {
+  background-color: rgba(204, 202, 192, 0.65);
+  border-radius: 3px;
+  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
 }
 
 .dropDownWrapper {

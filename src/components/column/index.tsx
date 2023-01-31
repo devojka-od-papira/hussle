@@ -2,9 +2,10 @@ import React, { FC, useState } from 'react';
 import { MoreHorizontal, PlusCircle } from 'react-feather';
 import { TwitterPicker } from 'react-color';
 import Typography, { TextType } from '../typography';
-import Card, { CardProps } from '../card';
+import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
+import { Priority } from '../../constants';
 
 import styles from './Column.module.scss';
 
@@ -12,18 +13,40 @@ interface ColorPickerEvent {
   hex: string;
 }
 
+type TaskType = {
+  priority: Priority;
+  description: string;
+  attachmentNumber: number;
+  commentNumber: number;
+}
+
 interface ColumnData {
   id: string;
   title: string;
   color: string;
+  tasks: TaskType[];
 }
 interface ColumnProps extends ColumnData {
-  tasks: CardProps[];
-  updateColor: (hex: string, id: string, title: string, tasks: CardProps[]) => void;
+  updateColor: (hex: string, id: string, title: string, tasks: TaskType[]) => void;
   handleAddTaskModal: (id: string) => void;
+  editTask: () => void;
+  handleChangeDescriptionTask: (description: string) => void;
+  descriptionCard: string;
+  handleColumnId: (id: string) => void;
+  handleCardIndex: (index: number) => void;
 }
 const Column:FC<ColumnProps> = ({
-  tasks, title, id, color, updateColor, handleAddTaskModal,
+  tasks,
+  title,
+  id,
+  color,
+  updateColor,
+  handleAddTaskModal,
+  editTask,
+  handleChangeDescriptionTask,
+  descriptionCard,
+  handleColumnId,
+  handleCardIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleDropDown = () => {
@@ -36,7 +59,7 @@ const Column:FC<ColumnProps> = ({
       <div className={styles.wrapperTittle}>
         <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
         <div className={styles.dropDownWrapper}>
-          <Button onClick={handleDropDown}>
+          <Button onClick={handleDropDown} className={styles.buttonHover}>
             <MoreHorizontal color="gray" size={20} />
           </Button>
           {isOpen
@@ -61,6 +84,13 @@ const Column:FC<ColumnProps> = ({
             description={item.description}
             attachmentNumber={item.attachmentNumber}
             commentNumber={item.commentNumber}
+            editTask={editTask}
+            handleChangeDescriptionTask={handleChangeDescriptionTask}
+            descriptionCard={descriptionCard}
+            handleColumnId={handleColumnId}
+            columnId={id}
+            cardIndex={i}
+            handleCardIndex={handleCardIndex}
           />
         </div>
       ))}

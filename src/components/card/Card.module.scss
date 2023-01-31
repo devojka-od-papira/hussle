@@ -4,10 +4,10 @@
   background-color: white;
 }
 
-.priorityTag {
-  padding-left: 10px;
-  padding-top: 10px;
-  padding-bottom: 13px;
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 13px 10px;
 }
 
 .description {
@@ -70,6 +70,37 @@
   border: 1px solid  #9B9B9B;
   text-align: center;
   background-color:  #9B9B9B;
+}
+
+.hoverButtonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(55, 53, 47, 0.65);
+  fill: rgba(55, 53, 47, 0.65);
+  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+  border-radius: 3px
+}
+
+.buttonHover:hover {
+  background-color:  lightgrey;
+  height: 100%;
+}
+
+.modalInput {
+  border-radius: 3px;
+}
+
+.modalButton {
+  background: linear-gradient(90deg, #9EA7FC 0%, #65B6F7 124.87%);
+  font-size: 16px;
+  color: white;
+  box-sizing: border-box;
+  padding: 10px ;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  border-radius: 4px;
 }
 
 
