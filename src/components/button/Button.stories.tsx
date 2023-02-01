@@ -2,10 +2,14 @@ import React from 'react';
 import cx from 'classnames';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import {
-  ChevronDown, Paperclip, Plus, PlusCircle,
+  Plus,
+  Paperclip,
+  PlusCircle,
+  ChevronDown,
 } from 'react-feather';
 import Button from './index';
-import Typography, { TextType } from '../typography';
+import Typography from '../typography';
+import { TextType } from '../../types';
 
 import styles from './Button.stories.module.scss';
 

@@ -2,14 +2,14 @@ import React, { ChangeEvent, FC, useState } from 'react';
 import cx from 'classnames';
 import {
   Edit,
-  MessageSquare,
-  Paperclip,
   Plus,
-  Trash2,
   User,
+  Trash2,
+  Paperclip,
+  MessageSquare,
 } from 'react-feather';
 import PriorityTag from '../priorityTag';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 import Typography from '../typography';
 import Button from '../button';
 import Modal from '../modal';

@@ -1,9 +1,10 @@
 import React from 'react';
 import cx from 'classnames';
 import { Search, User } from 'react-feather';
-import Typography, { TextType } from '../typography';
+import Typography from '../typography';
 import Input from '../input';
 import Button from '../button';
+import { TextType } from '../../types';
 
 import styles from './Header.module.scss';
 

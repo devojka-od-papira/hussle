@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import cx from 'classnames';
 import Input from '../input';
 import Button from '../button';
@@ -9,7 +9,7 @@ import styles from './ForgetPassword.module.scss';
 const submit = () => {
   console.log('submit');
 };
-const ForgetPassword:React.FC = () => (
+const ForgetPassword:FC = () => (
   <div className={styles.wrapper}>
     <Input placeholder="User name" id="user" type="text" />
     <Input placeholder="Password" id="pass" type="password" />

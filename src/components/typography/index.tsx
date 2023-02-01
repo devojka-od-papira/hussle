@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
+import { TextType } from '../../types';
 
 import styles from './Typography.module.scss';
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'p' | 'span' ;
-export enum TextType {
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Description,
-  BodySmall,
-  Bold
-}
 
 type TextOptions<T = boolean> = { [key in keyof typeof TextType]: T };
 interface TypographyProps {

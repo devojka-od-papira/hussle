@@ -1,7 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { X } from 'react-feather';
-import Typography, { TextType } from '../typography';
+import Typography from '../typography';
 import Button from '../button/index';
+import { TextType } from '../../types';
 
 import styles from './DropDown.module.scss';
 

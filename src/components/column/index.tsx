@@ -1,23 +1,16 @@
 import React, { FC, useState } from 'react';
 import { MoreHorizontal, PlusCircle } from 'react-feather';
 import { TwitterPicker } from 'react-color';
-import Typography, { TextType } from '../typography';
+import Typography from '../typography';
 import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
-import { Priority } from '../../constants';
+import { Priority, TextType, TaskType } from '../../types';
 
 import styles from './Column.module.scss';
 
 interface ColorPickerEvent {
   hex: string;
-}
-
-type TaskType = {
-  priority: Priority;
-  description: string;
-  attachmentNumber: number;
-  commentNumber: number;
 }
 
 interface ColumnData {

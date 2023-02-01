@@ -1,6 +1,6 @@
 import React, { ReactNode, FC } from 'react';
 import cx from 'classnames';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 
 import styles from './Checkbox.module.scss';
 
@@ -13,7 +13,11 @@ interface CheckboxProps {
 }
 
 const Checkbox:FC<CheckboxProps> = ({
-  children, className, checked, handleChange, priority,
+  children,
+  className,
+  checked,
+  handleChange,
+  priority,
 }) => (
   <div className={styles.wrapperCheckbox}>
     <input

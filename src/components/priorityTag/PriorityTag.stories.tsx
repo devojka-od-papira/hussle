@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import PriorityTag from './index';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 
 export default {
   title: 'Component/PriorityTag',

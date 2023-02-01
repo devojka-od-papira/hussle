@@ -1,20 +1,25 @@
 import React, {
-  ReactNode, createContext, FC, useState, useEffect,
+  FC,
+  useState,
+  ReactNode,
+  useEffect,
+  createContext,
 } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../db';
+import { ContextType } from '../types';
 
-export const Context = createContext<any | null>(null);
+export const Context = createContext<ContextType | null>(null);
 interface ProviderProps {
   children: ReactNode
 }
 const Provider:FC<ProviderProps> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [userUID, setUserUID] = useState<string>('');
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log('userContex', user?.uid);
+      console.log('user', user);
       if (user?.uid) {
         setUserUID(user?.uid);
       }
@@ -23,7 +28,7 @@ const Provider:FC<ProviderProps> = ({ children }) => {
 
   return (
     <Context.Provider value={{
-      currentUser,
+      user,
       userUID,
     }}
     >

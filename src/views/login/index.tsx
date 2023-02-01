@@ -3,7 +3,7 @@ import Button from '../../components/button';
 import SignIn from '../../components/signIn';
 import SignUp from '../../components/signUp';
 import Typography from '../../components/typography';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 
 import styles from './Login.module.scss';
 
