@@ -27,6 +27,7 @@ interface ColumnProps extends ColumnData {
   descriptionCard: string;
   handleColumnId: (id: string) => void;
   handleCardIndex: (index: number) => void;
+  handleDeleteColumn: (id: string) => void;
 }
 const Column:FC<ColumnProps> = ({
   tasks,
@@ -40,6 +41,7 @@ const Column:FC<ColumnProps> = ({
   descriptionCard,
   handleColumnId,
   handleCardIndex,
+  handleDeleteColumn,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
@@ -49,10 +51,6 @@ const Column:FC<ColumnProps> = ({
 
   const handleColor = () => {
     setIsOpenColorPicker(!isOpenColorPicker);
-  };
-
-  const handleDelete = () => {
-    console.log('klik');
   };
   const selectColor = (hex: string, id: string, title: string, tasks: TaskType[]) => {
     updateColor(hex, id, title, tasks);
@@ -73,7 +71,7 @@ const Column:FC<ColumnProps> = ({
               <DropDown handleDropDown={handleDropDown} isOpen={isOpen}>
                 <div>
                   <Button
-                    onClick={handleDelete}
+                    onClick={() => handleDeleteColumn(id)}
                     className={styles.labelButton}
                   >
                     <Trash2 color="gray" size={20} />

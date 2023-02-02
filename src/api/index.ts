@@ -1,5 +1,5 @@
 import {
-  addDoc, collection, doc, getDocs, setDoc,
+  addDoc, collection, deleteDoc, doc, getDocs, setDoc,
 } from 'firebase/firestore';
 import { db } from '../db';
 import { ColumnType, Priority, TaskType } from '../types';
@@ -106,4 +106,13 @@ export const editTask = (
     }
     return column;
   });
+};
+
+export const deleteColumn = (columnId: string, columns: ColumnType[]) => {
+  const docRef = doc(db, 'columns', columnId);
+  return deleteDoc(docRef)
+    .then((response) => columns.filter((column) => column.id !== columnId))
+    .catch((error) => {
+      console.log('error', error);
+    });
 };

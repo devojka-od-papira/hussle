@@ -19,7 +19,7 @@ import {
 } from '../../types';
 import {
   addColumn,
-  createCard,
+  createCard, deleteColumn,
   editTask,
   fetchBoard,
   updateColor,
@@ -129,6 +129,16 @@ const Board = () => {
     setDescriptionCard(description);
   };
 
+  const handleDeleteColumn = (id:string) => {
+    deleteColumn(id, columns).then((response) => {
+      if (response) {
+        setColumns(response);
+      }
+    }).catch((error) => {
+      console.log('error', error);
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -160,6 +170,7 @@ const Board = () => {
                 descriptionCard={descriptionCard}
                 handleColumnId={handleColumnId}
                 handleCardIndex={handleCardIndex}
+                handleDeleteColumn={handleDeleteColumn}
               />
             </div>
           ))}
