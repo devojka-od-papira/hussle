@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
-import { MoreHorizontal, PlusCircle } from 'react-feather';
+import { MoreHorizontal, PlusCircle, Trash2 } from 'react-feather';
 import { TwitterPicker } from 'react-color';
 import Typography from '../typography';
 import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
-import { Priority, TextType, TaskType } from '../../types';
+import { TextType, TaskType } from '../../types';
 
 import styles from './Column.module.scss';
 
@@ -42,8 +42,18 @@ const Column:FC<ColumnProps> = ({
   handleCardIndex,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
   const handleDropDown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleColor = () => {
+    console.log('klik');
+    setIsOpenColorPicker(!isOpenColorPicker);
+  };
+
+  const handleDelete = () => {
+    console.log('klik');
   };
 
   return (
@@ -58,13 +68,32 @@ const Column:FC<ColumnProps> = ({
           {isOpen
             && (
               <DropDown handleDropDown={handleDropDown} isOpen={isOpen}>
-                <div className={styles.wrapperColor}>
-                  <Typography className={styles.colorDescription} variant="h5" type={TextType.Heading5}>Choose a color...</Typography>
-                  <div className={styles.colorPicker}>
-                    <TwitterPicker
-                      onChange={(e: ColorPickerEvent) => updateColor(e.hex, id, title, tasks)}
-                    />
-                  </div>
+                <div>
+                  <Button
+                    onClick={handleDelete}
+                    className={styles.labelButton}
+                  >
+                    <Trash2 color="gray" size={20} />
+                    <Typography variant="h5" type={TextType.Heading5}>
+                      Delete
+                    </Typography>
+                  </Button>
+                  <Button
+                    onClick={handleColor}
+                    className={styles.labelButton}
+                  >
+                    <Typography variant="h5" type={TextType.Heading5}>
+                      Choose a color...
+                    </Typography>
+                  </Button>
+                  {isOpenColorPicker
+                    && (
+                    <div className={styles.colorPicker}>
+                      <TwitterPicker
+                        onChange={(e: ColorPickerEvent) => updateColor(e.hex, id, title, tasks)}
+                      />
+                    </div>
+                    )}
                 </div>
               </DropDown>
             )}
