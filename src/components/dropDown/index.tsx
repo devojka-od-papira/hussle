@@ -16,7 +16,7 @@ const DropDown:FC<DropDownProps> = ({ isOpen, handleDropDown, children }) => (
   <div className={styles.dropDown}>
     <div className={styles.wrapperTittle}>
       <Typography className={styles.title} variant="h5" type={TextType.Heading5}>List actions</Typography>
-      <Button onClick={handleDropDown}>
+      <Button className={styles.button} onClick={handleDropDown}>
         <X size={16} color="gray" />
       </Button>
     </div>

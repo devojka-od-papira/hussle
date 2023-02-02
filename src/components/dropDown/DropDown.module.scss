@@ -1,6 +1,6 @@
 .dropDown {
   position: fixed;
-  width: 260px;
+  width: 200px;
   box-shadow: 0 8px 16px -4px #fafafa,0 0 0 1px #fafafa;
   border-radius: 5px;
   background-color: white;
@@ -20,4 +20,9 @@
 .title {
   margin: 0 auto;
   color: gray;
+}
+
+.button:hover {
+  background-color: #ebecf0;
+  border-radius: 3px;
 }

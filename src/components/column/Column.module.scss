@@ -61,23 +61,26 @@
   margin-right: 15px;
 }
 
-.colorWrapper {
-  padding: 10px;
-}
-
-.colorDescription {
-  color: gray;
-  height: 40px;
-  text-align: start;
-  display: flex;
-  align-items: center;
-}
-
-.colorDescription:hover {
-  background-color: #ebecf0;
-}
-
-
 .colorPicker {
   margin: 0 auto;
+}
+
+.labelButton {
+  width: 100%;
+  text-transform: none;
+  padding: 0;
+  display: flex;
+  text-align: start;
+  align-items: center;
+  height: 40px;
+  color: gray;
+
+  svg{
+    margin-right: 10px;
+  }
+}
+
+.labelButton:hover {
+  background-color: #ebecf0;
+  border-radius: 3px;
 }
