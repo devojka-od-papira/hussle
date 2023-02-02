@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Card from './index';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 
 export default {
   title: 'Component/Card',

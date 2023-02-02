@@ -1,7 +1,8 @@
 import React from 'react';
 import { Settings } from 'react-feather';
-import Typography, { TextType } from '../typography';
+import Typography from '../typography';
 import Button from '../button';
+import { TextType } from '../../types';
 
 import styles from './SideBar.module.scss';
 

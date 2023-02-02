@@ -1,41 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
 import cx from 'classnames';
-import {
-  doc,
-  setDoc,
-  addDoc,
-  getDocs,
-  collection,
-} from 'firebase/firestore';
 import { Plus, User } from 'react-feather';
-import { db } from '../../db';
 import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
-import Typography, { TextType } from '../../components/typography';
+import Typography from '../../components/typography';
 import Button from '../../components/button';
 import Column from '../../components/column';
 import Modal from '../../components/modal';
-import { Priority } from '../../constants';
 import { Context } from '../../context';
 import Input from '../../components/input';
 import Checkbox from '../../components/checkbox';
 import PriorityTag from '../../components/priorityTag';
+import {
+  Priority,
+  TextType,
+  TaskType,
+  ColumnType,
+} from '../../types';
+import {
+  addColumn,
+  createCard,
+  editTask,
+  fetchBoard,
+  updateColor,
+} from '../../api';
 
 import styles from './Board.module.scss';
-
-export type TaskType = {
-  priority: Priority;
-  description: string;
-  attachmentNumber: number;
-  commentNumber: number;
-}
-
-type ColumnType = {
-  title: string;
-  tasks: TaskType[];
-  color: string;
-  id: string;
-}
 
 const Board = () => {
   const context = useContext(Context);
@@ -53,90 +43,64 @@ const Board = () => {
     { priority: Priority.MED },
     { priority: Priority.HIGH },
   ];
+
   const handleClick = () => {
     console.log('user');
   };
   const handleModal = () => {
     setOpen(!open);
   };
-  const addColumnName = async () => {
-    try {
-      const docRef = await addDoc(collection(db, 'columns'), {
-        title: columnName,
-        tasks: [],
-        color: '#2596be',
-      });
-      setColumns([...columns, {
-        title: columnName,
-        tasks: [],
-        color: '#2596be',
-        id: docRef.id,
-      },
-      ]);
-      setOpen(false);
-    } catch (error) {
-      console.log('error', error);
-    }
+
+  const handleAddColumn = () => {
+    addColumn(columnName).then((response) => {
+      if (response) {
+        setColumns([...columns, response]);
+      }
+    }).catch((error) => console.log('error', error));
   };
 
-  useEffect(() => {
-    getDocs(collection(db, 'columns')).then((response) => {
-      const columns: ColumnType[] = response.docs.map((column) => {
-        const data = column.data() as ColumnType;
-        return {
-          ...data,
-          id: column.id,
-        };
-      });
-      setColumns(columns);
+  useEffect(
+    () => {
+      fetchBoard().then((response) => {
+        console.log('response', response);
+        if (response) {
+          setColumns(response);
+        }
+      })
+        .catch((error) => {
+          console.log('error', error);
+        });
+    },
+    [],
+  );
+
+  const handleUpdateColor = (hex:string, id: string, title: string, tasks: TaskType[]) => {
+    updateColor(hex, id, title, tasks, columns).then((response) => {
+      if (response) {
+        setColumns(response);
+      }
     }).catch((error) => {
       console.log('error', error);
     });
-  }, []);
-
-  const updateColor = (hex:string, id: string, title: string, tasks: TaskType[]) => {
-    const docRef = doc(db, 'columns', id);
-    const data = {
-      title,
-      tasks,
-      color: hex,
-    };
-    setDoc(docRef, data).then((response) => {
-      const newColumns = columns.map((column: ColumnType) => {
-        if (column.id === id) {
-          return { ...column, color: hex };
-        }
-        return column;
-      });
-      setColumns(newColumns);
-    });
   };
+
   const handleAddTaskModal = (id: string) => {
     setOpenTaskModal(!openTaskModal);
     setColumnId(id);
   };
-  const createCard = () => {
-    const docRef = doc(db, 'columns', columnId);
-    const data = {
-      priority,
-      description: descriptionCard,
-      attachmentNumber: 2,
-      commentNumber: 2,
-    };
-    const columnToBeUpdate = columns.find((column: ColumnType) => columnId === column.id);
-    const newCol = {
-      ...columnToBeUpdate, tasks: columnToBeUpdate?.tasks.push(data),
-    };
-    setDoc(docRef, columnToBeUpdate).then((response) => {
-      const newColumns = columns.map((column:ColumnType) => {
-        if (column.id === columnToBeUpdate?.id) {
-          return columnToBeUpdate;
+
+  const handleCreateCard = () => {
+    createCard(columnId, priority, descriptionCard, columns)
+      .then((response) => {
+        if (response) {
+          setColumns(response);
         }
-        return column;
+      })
+      .catch((error) => {
+        console.log('error', error);
       });
-      setColumns(newColumns);
-    });
   };
+
   const handlePriorityChange = (priority: Priority) => {
     setPriority(priority);
   };
@@ -145,32 +109,14 @@ const Board = () => {
     [Priority.MED]: styles.med,
     [Priority.HIGH]: styles.high,
   };
-  const editTask = () => {
-    const docRef = doc(db, 'columns', columnId);
-    const newColumn = columns.find((item) => item.id === columnId);
-    if (newColumn?.tasks) {
-      const newTasks = newColumn?.tasks.map((task, index) => {
-        if (index === cardIndex) {
-          return {
-            ...task, description: descriptionCard,
-          };
-        }
-        return task;
-      });
-      const data = { ...newColumn, tasks: newTasks };
-      setDoc(docRef, data).then((response) => {
-        const newColumns = columns.map((column) => {
-          if (column.id === columnId) {
-            return data;
-          }
-          return column;
-        });
-        setColumns(newColumns);
-      }).catch((error) => {
-        console.log('error', error);
-      });
+
+  const handleEditTask = () => {
+    const response = editTask(columnId, columns, cardIndex, descriptionCard);
+    if (response) {
+      setColumns(response);
     }
   };
+
   const handleCardIndex = (index: number) => {
     setCardIndex(index);
   };
@@ -180,9 +126,9 @@ const Board = () => {
   };
 
   const handleChangeDescriptionTask = (description: string) => {
-    console.log('description', description);
     setDescriptionCard(description);
   };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -208,8 +154,8 @@ const Board = () => {
                 tasks={column.tasks}
                 color={column.color}
                 handleAddTaskModal={handleAddTaskModal}
-                updateColor={updateColor}
-                editTask={editTask}
+                updateColor={handleUpdateColor}
+                editTask={handleEditTask}
                 handleChangeDescriptionTask={handleChangeDescriptionTask}
                 descriptionCard={descriptionCard}
                 handleColumnId={handleColumnId}
@@ -236,7 +182,7 @@ const Board = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}
         />
         <Button
-          onClick={addColumnName}
+          onClick={handleAddColumn}
           className={styles.modalButton}
         >
           ADD COLUMN
@@ -273,12 +219,11 @@ const Board = () => {
             </Checkbox>
           ))}
         </div>
-        <Button onClick={createCard} className={styles.modalButton}>
+        <Button onClick={handleCreateCard} className={styles.modalButton}>
           Create card
         </Button>
       </Modal>
     </div>
   );
 };
-
 export default Board;

@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import Typography from '../typography';
-import { Priority } from '../../constants';
+import { Priority } from '../../types';
 
 import styles from './PriorityTag.module.scss';
 
@@ -11,7 +11,11 @@ interface PriorityTagProps {
   className?: string;
 }
 
-const PriorityTag:React.FC<PriorityTagProps> = ({ priority, onChange, className }) => (
+const PriorityTag:React.FC<PriorityTagProps> = ({
+  priority,
+  onChange,
+  className,
+}) => (
   <div
     className={cx(styles.tag, className, {
       [styles.low]: priority === Priority.LOW,
