@@ -48,12 +48,15 @@ const Column:FC<ColumnProps> = ({
   };
 
   const handleColor = () => {
-    console.log('klik');
     setIsOpenColorPicker(!isOpenColorPicker);
   };
 
   const handleDelete = () => {
     console.log('klik');
+  };
+  const selectColor = (hex: string, id: string, title: string, tasks: TaskType[]) => {
+    updateColor(hex, id, title, tasks);
+    setIsOpenColorPicker(!isOpenColorPicker);
   };
 
   return (
@@ -90,7 +93,7 @@ const Column:FC<ColumnProps> = ({
                     && (
                     <div className={styles.colorPicker}>
                       <TwitterPicker
-                        onChange={(e: ColorPickerEvent) => updateColor(e.hex, id, title, tasks)}
+                        onChange={(e: ColorPickerEvent) => selectColor(e.hex, id, title, tasks)}
                       />
                     </div>
                     )}
