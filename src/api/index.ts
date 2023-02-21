@@ -116,3 +116,16 @@ export const deleteColumn = (columnId: string, columns: ColumnType[]) => {
       console.log('error', error);
     });
 };
+
+export const deleteTask = (columnId: string, cardIndex: number, columns: ColumnType[]) => {
+  const docRef = doc(db, 'columns', columnId);
+  return columns.map((column) => {
+    if (columnId === column.id) {
+      const newTasks = column.tasks.filter((column, index) => cardIndex !== index);
+      const newColumn = { ...column, tasks: newTasks };
+      setDoc(docRef, newColumn);
+      return newColumn;
+    }
+    return column;
+  });
+};

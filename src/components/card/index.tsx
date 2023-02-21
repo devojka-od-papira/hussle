@@ -1,12 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import cx from 'classnames';
 import {
-  Edit,
-  Plus,
-  User,
-  Trash2,
-  Paperclip,
-  MessageSquare,
+  Edit, MessageSquare, Paperclip, Plus, Trash2, User,
 } from 'react-feather';
 import PriorityTag from '../priorityTag';
 import { Priority } from '../../types';
@@ -29,6 +24,7 @@ export interface CardProps {
   columnId: string;
   cardIndex: number;
   handleCardIndex: (index: number) => void;
+  handleDeleteTask: (columnId: string, cardIndex: number) => void;
 }
 
 const Card: FC<CardProps> = ({
@@ -43,8 +39,10 @@ const Card: FC<CardProps> = ({
   columnId,
   cardIndex,
   handleCardIndex,
+  handleDeleteTask,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const handleClick = () => {
     console.log('click');
@@ -53,10 +51,14 @@ const Card: FC<CardProps> = ({
     setIsHover(!isHover);
   };
   const handleModal = () => {
+    console.log('edit task');
     setIsOpenModal(!isOpenModal);
     handleChangeDescriptionTask(description);
     handleColumnId(columnId);
     handleCardIndex(cardIndex);
+  };
+  const handleDeletePopUp = () => {
+    setIsOpenPopUp(!isOpenPopUp);
   };
   return (
     <>
@@ -68,7 +70,7 @@ const Card: FC<CardProps> = ({
             <Button className={styles.buttonHover} onClick={handleModal}>
               <Edit color="gray" size={18} />
             </Button>
-            <Button className={styles.buttonHover} onClick={handleModal}>
+            <Button className={styles.buttonHover} onClick={handleDeletePopUp}>
               <Trash2 color="gray" size={18} />
             </Button>
           </div>
@@ -104,7 +106,11 @@ const Card: FC<CardProps> = ({
           </div>
         </div>
       </div>
-      <Modal isOpen={isOpenModal} handleClose={handleModal} title="Edit task">
+      <Modal
+        isOpen={isOpenModal}
+        handleClose={handleModal}
+        title="Edit task"
+      >
         <Input
           id="edit"
           type="text"
@@ -120,6 +126,19 @@ const Card: FC<CardProps> = ({
           className={styles.modalButton}
         >
           EDIT
+        </Button>
+      </Modal>
+      <Modal
+        isOpen={isOpenPopUp}
+        handleClose={handleDeletePopUp}
+        title="Are you absolutely sure?"
+        className={styles.modalDelete}
+      >
+        <Button
+          onClick={() => handleDeleteTask(columnId, cardIndex)}
+          className={cx(styles.modalButton, styles.red)}
+        >
+          DELETE
         </Button>
       </Modal>
     </>

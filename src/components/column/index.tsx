@@ -5,7 +5,7 @@ import Typography from '../typography';
 import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
-import { TextType, TaskType } from '../../types';
+import {TextType, TaskType, ColumnType} from '../../types';
 
 import styles from './Column.module.scss';
 
@@ -28,6 +28,7 @@ interface ColumnProps extends ColumnData {
   handleColumnId: (id: string) => void;
   handleCardIndex: (index: number) => void;
   handleDeleteColumn: (id: string) => void;
+  handleDeleteTask: (columnId: string, cardIndex: number) => void;
 }
 const Column:FC<ColumnProps> = ({
   tasks,
@@ -42,6 +43,7 @@ const Column:FC<ColumnProps> = ({
   handleColumnId,
   handleCardIndex,
   handleDeleteColumn,
+  handleDeleteTask,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
@@ -114,6 +116,7 @@ const Column:FC<ColumnProps> = ({
             columnId={id}
             cardIndex={i}
             handleCardIndex={handleCardIndex}
+            handleDeleteTask={handleDeleteTask}
           />
         </div>
       ))}
