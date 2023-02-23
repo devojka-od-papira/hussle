@@ -24,7 +24,7 @@ export const fetchBoard = () => getDocs(collection(db, 'columns'))
   .catch((error) => {
     console.log('error', error);
   });
-export const addColumn = (columnName: string, userUID: string | undefined) => addDoc(collection(db, 'columns'), {
+export const addColumn = (columnName: string, userUID: string) => addDoc(collection(db, 'columns'), {
   title: columnName,
   tasks: [],
   color: '#2596be',

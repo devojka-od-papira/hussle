@@ -54,11 +54,13 @@ const Board = () => {
   };
 
   const handleAddColumn = () => {
-    addColumn(columnName, context?.userUID).then((response) => {
-      if (response) {
-        setColumns([...columns, response]);
-      }
-    }).catch((error) => console.log('error', error));
+    if (context?.userUID) {
+      addColumn(columnName, context.userUID).then((response) => {
+        if (response) {
+          setColumns([...columns, response]);
+        }
+      }).catch((error) => console.log('error', error));
+    }
   };
 
   useEffect(
