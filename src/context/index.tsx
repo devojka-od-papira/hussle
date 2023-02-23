@@ -19,9 +19,8 @@ const Provider:FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log('user', user?.uid);
       if (user?.uid) {
-        setUserUID(user?.uid);
+        setUserUID(user.uid);
       }
     });
   }, []);
