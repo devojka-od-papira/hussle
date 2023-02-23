@@ -54,7 +54,7 @@ const Board = () => {
   };
 
   const handleAddColumn = () => {
-    addColumn(columnName).then((response) => {
+    addColumn(columnName, context?.userUID).then((response) => {
       if (response) {
         setColumns([...columns, response]);
       }

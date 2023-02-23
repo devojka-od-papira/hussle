@@ -1,8 +1,17 @@
 import {
-  addDoc, collection, deleteDoc, doc, getDocs, setDoc,
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
 } from 'firebase/firestore';
 import { db } from '../db';
-import { ColumnType, Priority, TaskType } from '../types';
+import {
+  ColumnType,
+  Priority,
+  TaskType,
+} from '../types';
 
 export const fetchBoard = () => getDocs(collection(db, 'columns'))
   .then((response) => response.docs.map((column) => {
@@ -15,15 +24,17 @@ export const fetchBoard = () => getDocs(collection(db, 'columns'))
   .catch((error) => {
     console.log('error', error);
   });
-export const addColumn = (columnName: string) => addDoc(collection(db, 'columns'), {
+export const addColumn = (columnName: string, userUID: string | undefined) => addDoc(collection(db, 'columns'), {
   title: columnName,
   tasks: [],
   color: '#2596be',
+  userUID,
 }).then((response) => ({
   title: columnName,
   tasks: [],
   color: '#2596be',
   id: response.id,
+  userUID,
 })).catch((error) => console.log('error', error));
 export const updateColor = (
   hex:string,
