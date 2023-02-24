@@ -5,7 +5,7 @@ import Typography from '../typography';
 import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
-import {TextType, TaskType, ColumnType} from '../../types';
+import { TextType, TaskType } from '../../types';
 
 import styles from './Column.module.scss';
 

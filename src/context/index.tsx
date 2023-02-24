@@ -1,7 +1,7 @@
 import React, {
   FC,
-  useState,
   ReactNode,
+  useState,
   useEffect,
   createContext,
 } from 'react';
@@ -19,9 +19,8 @@ const Provider:FC<ProviderProps> = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log('user', user);
       if (user?.uid) {
-        setUserUID(user?.uid);
+        setUserUID(user.uid);
       }
     });
   }, []);
