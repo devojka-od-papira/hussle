@@ -73,7 +73,8 @@ const Board = () => {
     () => {
       fetchBoard().then((response) => {
         if (response) {
-          setColumns(response);
+          const filteredResponse = response.filter((item) => item.userUID === context?.userUID);
+          setColumns(filteredResponse);
         }
       })
         .catch((error) => {
@@ -98,7 +99,6 @@ const Board = () => {
     setColumnId(id);
   };
 
-  console.log('mleko je prosuto, ne placi');
   const handleCreateCard = () => {
     createCard(columnId, priority, descriptionCard, columns)
       .then((response) => {
