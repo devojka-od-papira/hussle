@@ -98,6 +98,7 @@ const Board = () => {
     setColumnId(id);
   };
 
+  console.log('mleko je prosuto, ne placi');
   const handleCreateCard = () => {
     createCard(columnId, priority, descriptionCard, columns)
       .then((response) => {
