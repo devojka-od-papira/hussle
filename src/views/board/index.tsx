@@ -73,7 +73,8 @@ const Board = () => {
     () => {
       fetchBoard().then((response) => {
         if (response) {
-          setColumns(response);
+          const filteredResponse = response.filter((item) => item.userUID === context?.userUID);
+          setColumns(filteredResponse);
         }
       })
         .catch((error) => {

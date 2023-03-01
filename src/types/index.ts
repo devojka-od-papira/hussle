@@ -27,6 +27,7 @@ export type ColumnType = {
   tasks: TaskType[];
   color: string;
   id: string;
+  userUID: string;
 }
 
 export type ContextType = {
