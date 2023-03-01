@@ -29,6 +29,7 @@ interface ColumnProps extends ColumnData {
   handleCardIndex: (index: number) => void;
   handleDeleteColumn: (id: string) => void;
   handleDeleteTask: (columnId: string, cardIndex: number) => void;
+  search: string;
 }
 const Column:FC<ColumnProps> = ({
   tasks,
@@ -44,6 +45,7 @@ const Column:FC<ColumnProps> = ({
   handleCardIndex,
   handleDeleteColumn,
   handleDeleteTask,
+  search,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
@@ -117,6 +119,7 @@ const Column:FC<ColumnProps> = ({
             cardIndex={i}
             handleCardIndex={handleCardIndex}
             handleDeleteTask={handleDeleteTask}
+            search={search}
           />
         </div>
       ))}

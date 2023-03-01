@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import cx from 'classnames';
 import { Search, User } from 'react-feather';
 import Typography from '../typography';
@@ -8,7 +8,11 @@ import { TextType } from '../../types';
 
 import styles from './Header.module.scss';
 
-const Header = () => {
+interface HeaderProps {
+    handleSearch: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const Header:FC<HeaderProps> = ({ handleSearch }) => {
   const handleClick = () => {
     console.log('klick');
   };
@@ -20,6 +24,7 @@ const Header = () => {
         id="search"
         type="string"
         icon={<Search size={16} color="white" />}
+        onChange={handleSearch}
       />
       <div className={styles.userWrapper}>
         <Typography variant="h5" type={TextType.Heading5} className={styles.user}>M.Thomson</Typography>

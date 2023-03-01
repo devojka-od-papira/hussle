@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import cx from 'classnames';
 import { Plus, User } from 'react-feather';
 import Header from '../../components/header';
@@ -39,6 +44,7 @@ const Board = () => {
   const [columnId, setColumnId] = useState('');
   const [priority, setPriority] = useState(Priority.MED);
   const [cardIndex, setCardIndex] = useState(0);
+  const [search, setSearch] = useState('');
 
   const priorityData = [
     { priority: Priority.LOW },
@@ -66,7 +72,6 @@ const Board = () => {
   useEffect(
     () => {
       fetchBoard().then((response) => {
-        console.log('response', response);
         if (response) {
           setColumns(response);
         }
@@ -149,9 +154,13 @@ const Board = () => {
     setColumns(response);
   };
 
+  const handleSearch = (e : ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className={styles.container}>
-      <Header />
+      <Header handleSearch={handleSearch} />
       <Sidebar />
       <div className={styles.wrapper}>
         <div className={styles.inner}>
@@ -182,6 +191,7 @@ const Board = () => {
                 handleCardIndex={handleCardIndex}
                 handleDeleteColumn={handleDeleteColumn}
                 handleDeleteTask={handleDeleteTask}
+                search={search}
               />
             </div>
           ))}

@@ -1,7 +1,12 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import cx from 'classnames';
 import {
-  Edit, MessageSquare, Paperclip, Plus, Trash2, User,
+  MessageSquare,
+  Paperclip,
+  Trash2,
+  Edit,
+  Plus,
+  User,
 } from 'react-feather';
 import PriorityTag from '../priorityTag';
 import { Priority } from '../../types';
@@ -25,6 +30,7 @@ export interface CardProps {
   cardIndex: number;
   handleCardIndex: (index: number) => void;
   handleDeleteTask: (columnId: string, cardIndex: number) => void;
+  search: string;
 }
 
 const Card: FC<CardProps> = ({
@@ -40,6 +46,7 @@ const Card: FC<CardProps> = ({
   cardIndex,
   handleCardIndex,
   handleDeleteTask,
+  search,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenPopUp, setIsOpenPopUp] = useState(false);
@@ -51,7 +58,6 @@ const Card: FC<CardProps> = ({
     setIsHover(!isHover);
   };
   const handleModal = () => {
-    console.log('edit task');
     setIsOpenModal(!isOpenModal);
     handleChangeDescriptionTask(description);
     handleColumnId(columnId);
@@ -62,7 +68,19 @@ const Card: FC<CardProps> = ({
   };
   return (
     <>
-      <div className={styles.card} onMouseEnter={handleHover} onMouseLeave={handleHover}>
+      <div
+        aria-disabled={search.length
+          ? !description.toLowerCase().includes(search.toLowerCase()) : false}
+        className={cx(
+          styles.card,
+          {
+            [styles.isDisableCard]: search.length
+              ? !description.toLowerCase().includes(search.toLowerCase()) : false,
+          },
+        )}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleHover}
+      >
         <div className={styles.topSection}>
           <PriorityTag priority={priority} />
           { isHover && (
