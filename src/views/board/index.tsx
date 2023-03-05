@@ -74,6 +74,7 @@ const Board = () => {
       fetchBoard().then((response) => {
         if (response) {
           const filteredResponse = response.filter((item) => item.userUID === context?.userUID);
+          console.log('response', response);
           setColumns(filteredResponse);
         }
       })
