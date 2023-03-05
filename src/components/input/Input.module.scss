@@ -7,16 +7,16 @@
   border: none;
   padding: 15px 20px;
   border-radius: 25px;
-  background-color: #b4b4cb;
+  background-color: #ebecf0;
   outline: none;
   margin-bottom: 15px;
-  color: white;
+  color: #888fdb;
 }
 
 .input::placeholder {
   @include h4;
 
-  color: white;
+  color: #c4c7ea;
 }
 
 .inputWrapper {
