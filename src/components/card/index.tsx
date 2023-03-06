@@ -82,7 +82,7 @@ const Card: FC<CardProps> = ({
         onMouseLeave={handleHover}
       >
         <div className={styles.topSection}>
-          <PriorityTag priority={priority} />
+          <PriorityTag priority={priority} className={styles.priorityTag} />
           { isHover && (
           <div className={styles.hoverButtonWrapper}>
             <Button className={styles.buttonHover} onClick={handleModal}>

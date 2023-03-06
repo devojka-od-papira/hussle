@@ -88,7 +88,8 @@
 }
 
 .modalInput {
-  border-radius: 3px;
+  border-radius: 25px;
+  border: 1px solid #d2d7e0;
 }
 
 .modalButton {
@@ -96,15 +97,16 @@
   font-size: 16px;
   color: white;
   box-sizing: border-box;
-  padding: 10px ;
+  padding: 10px 15px ;
   position: absolute;
   bottom: 40px;
   right: 40px;
-  border-radius: 4px;
+  border-radius: 25px;
+  border: 1px solid #888fdb;
 }
 
 .red {
-  background: darkred;
+  background: linear-gradient(133.98deg, #C781FF -18.23%, #E57373 125.36%);
 }
 
 .modalDelete {
@@ -114,4 +116,10 @@
 .isDisableCard {
   opacity: 0.25;
   pointer-events: none;
+}
+
+.priorityTag {
+  border: 1px solid #d2d7e0;
+  border-radius: 25px;
+  background-color: red;
 }
