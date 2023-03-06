@@ -1,5 +1,6 @@
 import React from 'react';
 import Typography from '../typography';
+import { TextType } from '../../types';
 
 import styles from './ProjectAvatar.module.scss';
 
@@ -27,7 +28,7 @@ const ProjectAvatar = () => {
       <div className={styles.scrollContainer}>
         {myArr.map((item, i) => (
           <div key={i} className={styles.content}>
-            <Typography variant="h2">{item.title}</Typography>
+            <Typography variant="h2" type={TextType.Heading4}>{item.title}</Typography>
           </div>
         ))}
       </div>
