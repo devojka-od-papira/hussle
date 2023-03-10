@@ -9,7 +9,6 @@ interface DeleteColumnProps {
   id: string;
   handleDeleteColumn: (id: string) => void;
   isConfirm: boolean;
-
   handleConfirmVisibility: () => void;
 }
 
@@ -18,23 +17,20 @@ const DeleteColumnModal:FC<DeleteColumnProps> = ({
   handleDeleteColumn,
   isConfirm,
   handleConfirmVisibility,
-}) => {
-  console.log('id!!!!', id);
-  return (
-    <Modal
-      isOpen={isConfirm}
-      handleClose={handleConfirmVisibility}
-      title="Are you absolutely sure?"
-      className={styles.deleteColumnModal}
+}) => (
+  <Modal
+    isOpen={isConfirm}
+    handleClose={handleConfirmVisibility}
+    title="Are you absolutely sure?"
+    className={styles.deleteColumnModal}
+  >
+    <Button
+      onClick={() => handleDeleteColumn(id)}
+      className={cx(styles.button, styles.colorButton)}
     >
-      <Button
-        onClick={() => handleDeleteColumn(id)}
-        className={cx(styles.button, styles.colorButton)}
-      >
-        DELETE
-      </Button>
-    </Modal>
-  );
-};
+      DELETE
+    </Button>
+  </Modal>
+);
 
 export default DeleteColumnModal;

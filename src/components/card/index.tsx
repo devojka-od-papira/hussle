@@ -14,6 +14,7 @@ import Typography from '../typography';
 import Button from '../button';
 import Modal from '../modal';
 import Input from '../input';
+import DeleteTaskModal from '../modals/deleteTask';
 
 import styles from './Card.module.scss';
 
@@ -49,8 +50,8 @@ const Card: FC<CardProps> = ({
   search,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
   const handleClick = () => {
     console.log('click');
   };
@@ -63,8 +64,8 @@ const Card: FC<CardProps> = ({
     handleColumnId(columnId);
     handleCardIndex(cardIndex);
   };
-  const handleDeletePopUp = () => {
-    setIsOpenPopUp(!isOpenPopUp);
+  const handleConfirmVisibility = () => {
+    setIsConfirm(!isConfirm);
   };
   return (
     <>
@@ -88,7 +89,7 @@ const Card: FC<CardProps> = ({
             <Button className={styles.buttonHover} onClick={handleModal}>
               <Edit color="gray" size={18} />
             </Button>
-            <Button className={styles.buttonHover} onClick={handleDeletePopUp}>
+            <Button className={styles.buttonHover} onClick={handleConfirmVisibility}>
               <Trash2 color="gray" size={18} />
             </Button>
           </div>
@@ -146,19 +147,13 @@ const Card: FC<CardProps> = ({
           EDIT
         </Button>
       </Modal>
-      <Modal
-        isOpen={isOpenPopUp}
-        handleClose={handleDeletePopUp}
-        title="Are you absolutely sure?"
-        className={styles.modalDelete}
-      >
-        <Button
-          onClick={() => handleDeleteTask(columnId, cardIndex)}
-          className={cx(styles.modalButton, styles.red)}
-        >
-          DELETE
-        </Button>
-      </Modal>
+      <DeleteTaskModal
+        columnId={columnId}
+        cardIndex={cardIndex}
+        isConfirm={isConfirm}
+        handleConfirmVisibility={handleConfirmVisibility}
+        handleDeleteTask={handleDeleteTask}
+      />
     </>
   );
 };
