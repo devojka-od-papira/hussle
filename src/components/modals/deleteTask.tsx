@@ -10,7 +10,6 @@ interface DeleteTaskProps {
     cardIndex: number;
     handleDeleteTask: (columnId: string, cardIndex: number) => void;
     isConfirm: boolean;
-
     handleConfirmVisibility: () => void;
 }
 
