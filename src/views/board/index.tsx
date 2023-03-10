@@ -16,12 +16,14 @@ import { Context } from '../../context';
 import Input from '../../components/input';
 import Checkbox from '../../components/checkbox';
 import PriorityTag from '../../components/priorityTag';
+import DeleteColumnModal from '../../components/modals/deleteColumn';
 import {
   Priority,
   TextType,
   TaskType,
   ColumnType,
 } from '../../types';
+
 import {
   addColumn,
   createCard,
@@ -31,7 +33,6 @@ import {
   fetchBoard,
   updateColor,
 } from '../../api';
-
 import styles from './Board.module.scss';
 
 const Board = () => {
@@ -45,6 +46,7 @@ const Board = () => {
   const [priority, setPriority] = useState(Priority.MED);
   const [cardIndex, setCardIndex] = useState(0);
   const [search, setSearch] = useState('');
+  const [isConfirm, setIsConfirm] = useState(false);
 
   const priorityData = [
     { priority: Priority.LOW },
@@ -57,6 +59,9 @@ const Board = () => {
   };
   const handleModal = () => {
     setOpen(!open);
+  };
+  const handleConfirmVisibility = () => {
+    setIsConfirm(!isConfirm);
   };
 
   const handleAddColumn = () => {
@@ -140,6 +145,7 @@ const Board = () => {
   };
 
   const handleDeleteColumn = (id:string) => {
+    console.log('id', id);
     deleteColumn(id, columns)
       .then((response) => {
         if (response) {
@@ -190,9 +196,9 @@ const Board = () => {
                 descriptionCard={descriptionCard}
                 handleColumnId={handleColumnId}
                 handleCardIndex={handleCardIndex}
-                handleDeleteColumn={handleDeleteColumn}
                 handleDeleteTask={handleDeleteTask}
                 search={search}
+                handleConfirmVisibility={handleConfirmVisibility}
               />
             </div>
           ))}
@@ -256,6 +262,12 @@ const Board = () => {
           Create card
         </Button>
       </Modal>
+      <DeleteColumnModal
+        id={columnId}
+        isConfirm={isConfirm}
+        handleConfirmVisibility={handleConfirmVisibility}
+        handleDeleteColumn={handleDeleteColumn}
+      />
     </div>
   );
 };

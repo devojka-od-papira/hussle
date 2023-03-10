@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import cx from 'classnames';
 import { MoreHorizontal, PlusCircle, Trash2 } from 'react-feather';
 import { TwitterPicker } from 'react-color';
 import Typography from '../typography';
@@ -7,7 +6,6 @@ import Card from '../card';
 import Button from '../button';
 import DropDown from '../dropDown';
 import { TextType, TaskType } from '../../types';
-import Modal from '../modal';
 
 import styles from './Column.module.scss';
 
@@ -29,9 +27,9 @@ interface ColumnProps extends ColumnData {
   descriptionCard: string;
   handleColumnId: (id: string) => void;
   handleCardIndex: (index: number) => void;
-  handleDeleteColumn: (id: string) => void;
   handleDeleteTask: (columnId: string, cardIndex: number) => void;
   search: string;
+  handleConfirmVisibility: () => void;
 }
 const Column:FC<ColumnProps> = ({
   tasks,
@@ -45,15 +43,18 @@ const Column:FC<ColumnProps> = ({
   descriptionCard,
   handleColumnId,
   handleCardIndex,
-  handleDeleteColumn,
   handleDeleteTask,
   search,
+  handleConfirmVisibility,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
   const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
   const handleDropDown = () => {
     setIsOpen(!isOpen);
+  };
+  const handleVisibility = () => {
+    handleColumnId(id);
+    handleConfirmVisibility();
   };
 
   const handleColor = () => {
@@ -64,101 +65,82 @@ const Column:FC<ColumnProps> = ({
     setIsOpenColorPicker(!isOpenColorPicker);
   };
 
-  const handleDeletePopUp = () => {
-    setIsOpenPopUp(!isOpenPopUp);
-  };
-
   return (
-    <>
-      <div className={styles.column}>
-        <div className={styles.divider} style={{ backgroundColor: color }} />
-        <div className={styles.wrapperTittle}>
-          <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
-          <div className={styles.dropDownWrapper}>
-            <Button onClick={handleDropDown} className={styles.buttonHover}>
-              <MoreHorizontal color="gray" size={20} />
-            </Button>
-            {isOpen
-                  && (
-                  <DropDown handleDropDown={handleDropDown} isOpen={isOpen}>
-                    <div>
-                      <Button
-                        onClick={handleDeletePopUp}
-                        className={styles.labelButton}
-                      >
-                        <Trash2 color="gray" size={20} />
-                        <Typography variant="h5" type={TextType.Heading5}>
-                          Delete
-                        </Typography>
-                      </Button>
-                      <Button
-                        onClick={handleColor}
-                        className={styles.labelButton}
-                      >
-                        <Typography variant="h5" type={TextType.Heading5}>
-                          Choose a color...
-                        </Typography>
-                      </Button>
-                      {isOpenColorPicker
-                              && (
-                              <div className={styles.colorPicker}>
-                                <TwitterPicker
-                                  onChange={(e: ColorPickerEvent) => selectColor(
-                                    e.hex,
-                                    id,
-                                    title,
-                                    tasks,
-                                  )}
-                                />
-                              </div>
-                              )}
-                    </div>
-                  </DropDown>
-                  )}
-          </div>
-        </div>
-        {tasks.map((item, i) => (
-          <div key={i} className={styles.wrapperCard}>
-            <Card
-              priority={item.priority}
-              description={item.description}
-              attachmentNumber={item.attachmentNumber}
-              commentNumber={item.commentNumber}
-              editTask={editTask}
-              handleChangeDescriptionTask={handleChangeDescriptionTask}
-              descriptionCard={descriptionCard}
-              handleColumnId={handleColumnId}
-              columnId={id}
-              cardIndex={i}
-              handleCardIndex={handleCardIndex}
-              handleDeleteTask={handleDeleteTask}
-              search={search}
-            />
-          </div>
-        ))}
-        <div className={styles.wrapperButton}>
-          <Button onClick={() => handleAddTaskModal(id)} className={styles.button}>
-            <Typography variant="h4">
-              Add task
-            </Typography>
-            <PlusCircle size={16} />
+    <div className={styles.column}>
+      <div className={styles.divider} style={{ backgroundColor: color }} />
+      <div className={styles.wrapperTittle}>
+        <Typography className={styles.title} variant="h3" type={TextType.Heading3}>{title}</Typography>
+        <div className={styles.dropDownWrapper}>
+          <Button onClick={handleDropDown} className={styles.buttonHover}>
+            <MoreHorizontal color="gray" size={20} />
           </Button>
+          {isOpen
+                && (
+                <DropDown handleDropDown={handleDropDown} isOpen={isOpen}>
+                  <div>
+                    <Button
+                      onClick={handleVisibility}
+                      className={styles.labelButton}
+                    >
+                      <Trash2 color="gray" size={20} />
+                      <Typography variant="h5" type={TextType.Heading5}>
+                        Delete
+                      </Typography>
+                    </Button>
+                    <Button
+                      onClick={handleColor}
+                      className={styles.labelButton}
+                    >
+                      <Typography variant="h5" type={TextType.Heading5}>
+                        Choose a color...
+                      </Typography>
+                    </Button>
+                    {isOpenColorPicker
+                            && (
+                            <div className={styles.colorPicker}>
+                              <TwitterPicker
+                                onChange={(e: ColorPickerEvent) => selectColor(
+                                  e.hex,
+                                  id,
+                                  title,
+                                  tasks,
+                                )}
+                              />
+                            </div>
+                            )}
+                  </div>
+                </DropDown>
+                )}
         </div>
       </div>
-      <Modal
-        isOpen={isOpenPopUp}
-        handleClose={handleDeletePopUp}
-        title="Are you absolutely sure?"
-        className={styles.modalDelete}
-      >
-        <Button
-          onClick={() => handleDeleteColumn(id)}
-          className={cx(styles.modalButtonDelete, styles.red)}
-        >
-          DELETE
+      {tasks.map((item, i) => (
+        <div key={i} className={styles.wrapperCard}>
+          <Card
+            priority={item.priority}
+            description={item.description}
+            attachmentNumber={item.attachmentNumber}
+            commentNumber={item.commentNumber}
+            editTask={editTask}
+            handleChangeDescriptionTask={handleChangeDescriptionTask}
+            descriptionCard={descriptionCard}
+            handleColumnId={handleColumnId}
+            columnId={id}
+            cardIndex={i}
+            handleCardIndex={handleCardIndex}
+            handleDeleteTask={handleDeleteTask}
+            search={search}
+          />
+        </div>
+      ))}
+      <div className={styles.wrapperButton}>
+        <Button onClick={() => handleAddTaskModal(id)} className={styles.button}>
+          <Typography variant="h4">
+            Add task
+          </Typography>
+          <PlusCircle size={16} />
         </Button>
-      </Modal>
-    </>
+      </div>
+    </div>
   );
 };
 
