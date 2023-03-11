@@ -11,13 +11,10 @@ import Sidebar from '../../components/sidebar';
 import Typography from '../../components/typography';
 import Button from '../../components/button';
 import Column from '../../components/column';
-import Modal from '../../components/modal';
 import { Context } from '../../context';
-import Input from '../../components/input';
-import Checkbox from '../../components/checkbox';
-import PriorityTag from '../../components/priorityTag';
 import DeleteColumnModal from '../../components/modals/deleteColumn';
 import CreateColumnModal from '../../components/modals/createColumn';
+import CreateCardModal from '../../components/modals/createCard';
 import {
   Priority,
   TextType,
@@ -39,7 +36,7 @@ import styles from './Board.module.scss';
 const Board = () => {
   const context = useContext(Context);
   const [isOpenCreateColumnModal, setIsOpenCreateColumnModal] = useState(false);
-  const [openTaskModal, setOpenTaskModal] = useState(false);
+  const [isOpenCreateCardModal, setIsOpenCreateCardModal] = useState(false);
   const [columnName, setColumnName] = useState('');
   const [columns, setColumns] = useState<ColumnType[]>([]);
   const [descriptionCard, setDescriptionCard] = useState('');
@@ -61,7 +58,7 @@ const Board = () => {
   const handleCreateColumnModalVisibility = () => {
     setIsOpenCreateColumnModal(!isOpenCreateColumnModal);
   };
-  const handleConfirmVisibility = () => {
+  const handleDeleteColumnVisibility = () => {
     setIsConfirm(!isConfirm);
   };
 
@@ -70,6 +67,7 @@ const Board = () => {
       addColumn(columnName, context.userUID).then((response) => {
         if (response) {
           setColumns([...columns, response]);
+          handleCreateColumnModalVisibility();
         }
       }).catch((error) => console.log('error', error));
     }
@@ -100,8 +98,8 @@ const Board = () => {
     });
   };
 
-  const handleAddTaskModal = (id: string) => {
-    setOpenTaskModal(!openTaskModal);
+  const handleAddTaskModalVisibility = (id: string) => {
+    setIsOpenCreateCardModal(!isOpenCreateCardModal);
     setColumnId(id);
   };
 
@@ -110,6 +108,7 @@ const Board = () => {
       .then((response) => {
         if (response) {
           setColumns(response);
+          handleAddTaskModalVisibility('');
         }
       })
       .catch((error) => {
@@ -120,16 +119,12 @@ const Board = () => {
   const handlePriorityChange = (priority: Priority) => {
     setPriority(priority);
   };
-  const colors = {
-    [Priority.LOW]: styles.low,
-    [Priority.MED]: styles.med,
-    [Priority.HIGH]: styles.high,
-  };
 
-  const handleEditTask = () => {
+  const handleEditTask = (setIsOpenEditModal: any) => {
     const response = editTask(columnId, columns, cardIndex, descriptionCard);
     if (response) {
       setColumns(response);
+      setIsOpenEditModal(false);
     }
   };
 
@@ -150,6 +145,7 @@ const Board = () => {
       .then((response) => {
         if (response) {
           setColumns(response);
+          handleDeleteColumnVisibility();
         }
       }).catch((error) => {
         console.log('error', error);
@@ -189,7 +185,7 @@ const Board = () => {
                 title={column.title}
                 tasks={column.tasks}
                 color={column.color}
-                handleAddTaskModal={handleAddTaskModal}
+                handleAddTaskModalVisibility={handleAddTaskModalVisibility}
                 updateColor={handleUpdateColor}
                 editTask={handleEditTask}
                 handleChangeDescriptionTask={handleChangeDescriptionTask}
@@ -198,7 +194,7 @@ const Board = () => {
                 handleCardIndex={handleCardIndex}
                 handleDeleteTask={handleDeleteTask}
                 search={search}
-                handleConfirmVisibility={handleConfirmVisibility}
+                handleDeleteColumnVisibility={handleDeleteColumnVisibility}
               />
             </div>
           ))}
@@ -218,45 +214,19 @@ const Board = () => {
         setColumnName={setColumnName}
         handleAddColumn={handleAddColumn}
       />
-      <Modal
-        title="Create card"
-        isOpen={openTaskModal}
-        className={styles.modalContent}
-        handleClose={() => handleAddTaskModal('')}
-      >
-        <Input
-          placeholder="Enter description card"
-          id="card"
-          type="text"
-          className={styles.modalInput}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescriptionCard(e.target.value)}
-        />
-        <div>
-          {priorityData.map((priorityItem: {priority: Priority}) => (
-            <Checkbox
-              key={priorityItem.priority}
-              priority={priorityItem.priority}
-              handleChange={handlePriorityChange}
-              checked={priorityItem.priority === priority}
-              className={colors[priorityItem.priority]}
-            >
-              <div className={styles.priorityTag}>
-                <PriorityTag
-                  priority={priorityItem.priority}
-                  className={colors[priorityItem.priority]}
-                />
-              </div>
-            </Checkbox>
-          ))}
-        </div>
-        <Button onClick={handleCreateCard} className={styles.modalButton}>
-          Create card
-        </Button>
-      </Modal>
+      <CreateCardModal
+        isOpenCreateCardModal={isOpenCreateCardModal}
+        handleAddTaskModalVisibility={handleAddTaskModalVisibility}
+        setDescriptionCard={setDescriptionCard}
+        priorityData={priorityData}
+        handleCreateCard={handleCreateCard}
+        priority={priority}
+        handlePriorityChange={handlePriorityChange}
+      />
       <DeleteColumnModal
         id={columnId}
         isConfirm={isConfirm}
-        handleConfirmVisibility={handleConfirmVisibility}
+        handleDeleteColumnVisibility={handleDeleteColumnVisibility}
         handleDeleteColumn={handleDeleteColumn}
       />
     </div>

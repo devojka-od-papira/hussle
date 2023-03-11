@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import cx from 'classnames';
 import {
   MessageSquare,
@@ -22,7 +22,7 @@ export interface CardProps {
   description: string;
   attachmentNumber: number;
   commentNumber: number;
-  editTask: () => void;
+  editTask: (setIsOpenEditModal: React.Dispatch<React.SetStateAction<boolean>>) => void;
   handleChangeDescriptionTask: (description: string) => void;
   descriptionCard: string;
   handleColumnId: (id: string) => void;
@@ -66,6 +66,7 @@ const Card: FC<CardProps> = ({
   const handleConfirmVisibility = () => {
     setIsConfirm(!isConfirm);
   };
+
   return (
     <>
       <div
@@ -129,7 +130,7 @@ const Card: FC<CardProps> = ({
         descriptionCard={descriptionCard}
         handleVisibilityEditModal={handleVisibilityEditModal}
         handleChangeDescriptionTask={handleChangeDescriptionTask}
-        editTask={editTask}
+        editTask={() => editTask(setIsOpenEditModal)}
       />
       <DeleteTaskModal
         columnId={columnId}

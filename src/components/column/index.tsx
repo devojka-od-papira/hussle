@@ -21,15 +21,15 @@ interface ColumnData {
 }
 interface ColumnProps extends ColumnData {
   updateColor: (hex: string, id: string, title: string, tasks: TaskType[]) => void;
-  handleAddTaskModal: (id: string) => void;
-  editTask: () => void;
+  handleAddTaskModalVisibility: (id: string) => void;
+  editTask: (setIsOpenEditModal: React.Dispatch<React.SetStateAction<boolean>>) => void;
   handleChangeDescriptionTask: (description: string) => void;
   descriptionCard: string;
   handleColumnId: (id: string) => void;
   handleCardIndex: (index: number) => void;
   handleDeleteTask: (columnId: string, cardIndex: number) => void;
   search: string;
-  handleConfirmVisibility: () => void;
+  handleDeleteColumnVisibility: () => void;
 }
 const Column:FC<ColumnProps> = ({
   tasks,
@@ -37,7 +37,7 @@ const Column:FC<ColumnProps> = ({
   id,
   color,
   updateColor,
-  handleAddTaskModal,
+  handleAddTaskModalVisibility,
   editTask,
   handleChangeDescriptionTask,
   descriptionCard,
@@ -45,7 +45,7 @@ const Column:FC<ColumnProps> = ({
   handleCardIndex,
   handleDeleteTask,
   search,
-  handleConfirmVisibility,
+  handleDeleteColumnVisibility,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenColorPicker, setIsOpenColorPicker] = useState(false);
@@ -54,7 +54,7 @@ const Column:FC<ColumnProps> = ({
   };
   const handleVisibility = () => {
     handleColumnId(id);
-    handleConfirmVisibility();
+    handleDeleteColumnVisibility();
   };
 
   const handleColor = () => {
@@ -133,7 +133,7 @@ const Column:FC<ColumnProps> = ({
         </div>
       ))}
       <div className={styles.wrapperButton}>
-        <Button onClick={() => handleAddTaskModal(id)} className={styles.button}>
+        <Button onClick={() => handleAddTaskModalVisibility(id)} className={styles.button}>
           <Typography variant="h4">
             Add task
           </Typography>
