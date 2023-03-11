@@ -145,7 +145,6 @@ const Board = () => {
   };
 
   const handleDeleteColumn = (id:string) => {
-    console.log('id', id);
     deleteColumn(id, columns)
       .then((response) => {
         if (response) {

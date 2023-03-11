@@ -12,9 +12,8 @@ import PriorityTag from '../priorityTag';
 import { Priority } from '../../types';
 import Typography from '../typography';
 import Button from '../button';
-import Modal from '../modal';
-import Input from '../input';
 import DeleteTaskModal from '../modals/deleteTask';
+import EditTaskModal from '../modals/editTask';
 
 import styles from './Card.module.scss';
 
@@ -49,7 +48,7 @@ const Card: FC<CardProps> = ({
   handleDeleteTask,
   search,
 }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
   const handleClick = () => {
@@ -58,8 +57,8 @@ const Card: FC<CardProps> = ({
   const handleHover = () => {
     setIsHover(!isHover);
   };
-  const handleModal = () => {
-    setIsOpenModal(!isOpenModal);
+  const handleVisibilityEditModal = () => {
+    setIsOpenEditModal(!isOpenEditModal);
     handleChangeDescriptionTask(description);
     handleColumnId(columnId);
     handleCardIndex(cardIndex);
@@ -86,7 +85,7 @@ const Card: FC<CardProps> = ({
           <PriorityTag priority={priority} className={styles.priorityTag} />
           { isHover && (
           <div className={styles.hoverButtonWrapper}>
-            <Button className={styles.buttonHover} onClick={handleModal}>
+            <Button className={styles.buttonHover} onClick={handleVisibilityEditModal}>
               <Edit color="gray" size={18} />
             </Button>
             <Button className={styles.buttonHover} onClick={handleConfirmVisibility}>
@@ -125,28 +124,13 @@ const Card: FC<CardProps> = ({
           </div>
         </div>
       </div>
-      <Modal
-        isOpen={isOpenModal}
-        handleClose={handleModal}
-        title="Edit task"
-      >
-        <Input
-          id="edit"
-          type="text"
-          placeholder="Edit task..."
-          className={styles.modalInput}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            handleChangeDescriptionTask(e.target.value);
-          }}
-          value={descriptionCard}
-        />
-        <Button
-          onClick={editTask}
-          className={styles.modalButton}
-        >
-          EDIT
-        </Button>
-      </Modal>
+      <EditTaskModal
+        isOpenEditModal={isOpenEditModal}
+        descriptionCard={descriptionCard}
+        handleVisibilityEditModal={handleVisibilityEditModal}
+        handleChangeDescriptionTask={handleChangeDescriptionTask}
+        editTask={editTask}
+      />
       <DeleteTaskModal
         columnId={columnId}
         cardIndex={cardIndex}
