@@ -17,13 +17,13 @@ import Input from '../../components/input';
 import Checkbox from '../../components/checkbox';
 import PriorityTag from '../../components/priorityTag';
 import DeleteColumnModal from '../../components/modals/deleteColumn';
+import CreateColumnModal from '../../components/modals/createColumn';
 import {
   Priority,
   TextType,
   TaskType,
   ColumnType,
 } from '../../types';
-
 import {
   addColumn,
   createCard,
@@ -33,11 +33,12 @@ import {
   fetchBoard,
   updateColor,
 } from '../../api';
+
 import styles from './Board.module.scss';
 
 const Board = () => {
   const context = useContext(Context);
-  const [open, setOpen] = useState(false);
+  const [isOpenCreateColumnModal, setIsOpenCreateColumnModal] = useState(false);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const [columnName, setColumnName] = useState('');
   const [columns, setColumns] = useState<ColumnType[]>([]);
@@ -57,8 +58,8 @@ const Board = () => {
   const handleClick = () => {
     console.log('user');
   };
-  const handleModal = () => {
-    setOpen(!open);
+  const handleCreateColumnModalVisibility = () => {
+    setIsOpenCreateColumnModal(!isOpenCreateColumnModal);
   };
   const handleConfirmVisibility = () => {
     setIsConfirm(!isConfirm);
@@ -203,7 +204,7 @@ const Board = () => {
           ))}
           <div className={styles.innerButton}>
             <Button
-              onClick={handleModal}
+              onClick={handleCreateColumnModalVisibility}
               className={cx(styles.buttonPlusCircle)}
             >
               <Plus color="white" size={20} />
@@ -211,21 +212,12 @@ const Board = () => {
           </div>
         </div>
       </div>
-      <Modal isOpen={open} handleClose={handleModal} title="Create column">
-        <Input
-          id="text"
-          type="text"
-          className={styles.modalInput}
-          placeholder="Enter column name..."
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value)}
-        />
-        <Button
-          onClick={handleAddColumn}
-          className={styles.modalButton}
-        >
-          ADD COLUMN
-        </Button>
-      </Modal>
+      <CreateColumnModal
+        isOpenCreateColumnModal={isOpenCreateColumnModal}
+        handleCreateColumnModalVisibility={handleCreateColumnModalVisibility}
+        setColumnName={setColumnName}
+        handleAddColumn={handleAddColumn}
+      />
       <Modal
         title="Create card"
         isOpen={openTaskModal}
