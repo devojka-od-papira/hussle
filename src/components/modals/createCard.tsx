@@ -43,6 +43,7 @@ const CreateCardModal:FC<CreateCardModalProps> = ({
       isOpen={isOpenCreateCardModal}
       className={styles.content}
       handleClose={() => handleAddTaskModalVisibility('')}
+      classNames={styles.title}
     >
       <Input
         placeholder="Enter description card"

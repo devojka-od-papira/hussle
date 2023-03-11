@@ -22,6 +22,7 @@ const CreateColumnModal:FC<CreateColumnModalProps> = ({
     title="Create column"
     isOpen={isOpenCreateColumnModal}
     handleClose={handleCreateColumnModalVisibility}
+    classNames={styles.title}
   >
     <Input
       id="text"

@@ -12,6 +12,7 @@ interface ModalProps {
   children: ReactNode;
   title: string;
   className?: string;
+  classNames?: string;
 }
 const Modal: FC<ModalProps> = ({
   isOpen,
@@ -19,6 +20,7 @@ const Modal: FC<ModalProps> = ({
   children,
   title,
   className,
+  classNames,
 }) => {
   function disabledEventPropagation(event: React.SyntheticEvent) {
     if (event.stopPropagation) {
@@ -26,7 +28,7 @@ const Modal: FC<ModalProps> = ({
     }
   }
   return (isOpen ? (
-    <div role="button" tabIndex={0} className={styles.wrapper} onClick={handleClose} onKeyDown={handleClose}>
+    <div role="button" tabIndex={0} className={cx(styles.wrapper, classNames)} onClick={handleClose} onKeyDown={handleClose}>
       <div
         onKeyDown={disabledEventPropagation}
         onClick={disabledEventPropagation}

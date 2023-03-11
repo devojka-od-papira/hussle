@@ -24,6 +24,7 @@ const EditTaskModal:FC<EditTaskModalProps> = ({
     isOpen={isOpenEditModal}
     handleClose={handleVisibilityEditModal}
     title="Edit task"
+    classNames={styles.title}
   >
     <Input
       id="edit"
