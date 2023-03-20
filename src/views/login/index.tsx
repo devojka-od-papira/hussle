@@ -39,7 +39,7 @@ const Login = () => {
     },
   ];
   return (
-    <>
+    <div style={{ overflow: 'hidden', height: '100vh' }}>
       <div className={styles.wave} />
       <div className={styles.pageContainer}>
         <div className={styles.container}>
@@ -68,7 +68,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Login;
