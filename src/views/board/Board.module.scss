@@ -85,36 +85,8 @@
   right: 40px;
 }
 
-.modalInput {
-  border-radius: 25px;
-  margin-bottom: 40px;
-  border: 1px solid #d2d7e0;
-  background-color: #ebecf0;
-}
-
-.modalButton {
-  background: linear-gradient(90deg, #9EA7FC 0%, #65B6F7 124.87%);
-  font-size: 16px;
-  color: white;
-  box-sizing: border-box;
-  padding: 12px;
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  border-radius: 25px;
-  border: 1px solid #888fdb;
-}
-
 .checkBox {
   display: flex;
-}
-
-.modalContent {
-  min-height: 300px;
-}
-
-.priorityTag {
-  margin-left: 8px;
 }
 
 .low {

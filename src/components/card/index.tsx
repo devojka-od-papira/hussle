@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import cx from 'classnames';
 import {
   MessageSquare,
@@ -12,8 +12,8 @@ import PriorityTag from '../priorityTag';
 import { Priority } from '../../types';
 import Typography from '../typography';
 import Button from '../button';
-import Modal from '../modal';
-import Input from '../input';
+import DeleteTaskModal from '../modals/deleteTask';
+import EditTaskModal from '../modals/editTask';
 
 import styles from './Card.module.scss';
 
@@ -22,7 +22,7 @@ export interface CardProps {
   description: string;
   attachmentNumber: number;
   commentNumber: number;
-  editTask: () => void;
+  editTask: (setIsOpenEditModal: React.Dispatch<React.SetStateAction<boolean>>) => void;
   handleChangeDescriptionTask: (description: string) => void;
   descriptionCard: string;
   handleColumnId: (id: string) => void;
@@ -48,24 +48,25 @@ const Card: FC<CardProps> = ({
   handleDeleteTask,
   search,
 }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenPopUp, setIsOpenPopUp] = useState(false);
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const [isHover, setIsHover] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
   const handleClick = () => {
     console.log('click');
   };
   const handleHover = () => {
     setIsHover(!isHover);
   };
-  const handleModal = () => {
-    setIsOpenModal(!isOpenModal);
+  const handleVisibilityEditModal = () => {
+    setIsOpenEditModal(!isOpenEditModal);
     handleChangeDescriptionTask(description);
     handleColumnId(columnId);
     handleCardIndex(cardIndex);
   };
-  const handleDeletePopUp = () => {
-    setIsOpenPopUp(!isOpenPopUp);
+  const handleConfirmVisibility = () => {
+    setIsConfirm(!isConfirm);
   };
+
   return (
     <>
       <div
@@ -85,10 +86,10 @@ const Card: FC<CardProps> = ({
           <PriorityTag priority={priority} className={styles.priorityTag} />
           { isHover && (
           <div className={styles.hoverButtonWrapper}>
-            <Button className={styles.buttonHover} onClick={handleModal}>
+            <Button className={styles.buttonHover} onClick={handleVisibilityEditModal}>
               <Edit color="gray" size={18} />
             </Button>
-            <Button className={styles.buttonHover} onClick={handleDeletePopUp}>
+            <Button className={styles.buttonHover} onClick={handleConfirmVisibility}>
               <Trash2 color="gray" size={18} />
             </Button>
           </div>
@@ -124,41 +125,20 @@ const Card: FC<CardProps> = ({
           </div>
         </div>
       </div>
-      <Modal
-        isOpen={isOpenModal}
-        handleClose={handleModal}
-        title="Edit task"
-      >
-        <Input
-          id="edit"
-          type="text"
-          placeholder="Edit task..."
-          className={styles.modalInput}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            handleChangeDescriptionTask(e.target.value);
-          }}
-          value={descriptionCard}
-        />
-        <Button
-          onClick={editTask}
-          className={styles.modalButton}
-        >
-          EDIT
-        </Button>
-      </Modal>
-      <Modal
-        isOpen={isOpenPopUp}
-        handleClose={handleDeletePopUp}
-        title="Are you absolutely sure?"
-        className={styles.modalDelete}
-      >
-        <Button
-          onClick={() => handleDeleteTask(columnId, cardIndex)}
-          className={cx(styles.modalButton, styles.red)}
-        >
-          DELETE
-        </Button>
-      </Modal>
+      <EditTaskModal
+        isOpenEditModal={isOpenEditModal}
+        descriptionCard={descriptionCard}
+        handleVisibilityEditModal={handleVisibilityEditModal}
+        handleChangeDescriptionTask={handleChangeDescriptionTask}
+        editTask={() => editTask(setIsOpenEditModal)}
+      />
+      <DeleteTaskModal
+        columnId={columnId}
+        cardIndex={cardIndex}
+        isConfirm={isConfirm}
+        handleConfirmVisibility={handleConfirmVisibility}
+        handleDeleteTask={handleDeleteTask}
+      />
     </>
   );
 };

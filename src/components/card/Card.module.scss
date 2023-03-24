@@ -78,39 +78,13 @@
   justify-content: center;
   color: rgba(55, 53, 47, 0.65);
   fill: rgba(55, 53, 47, 0.65);
-  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+  box-shadow: rgb(15 15 15 / 10%) 0 0 0 1px, rgb(15 15 15 / 10%) 0 2px 4px;
   border-radius: 3px
 }
 
 .buttonHover:hover {
   background-color:  lightgrey;
   height: 100%;
-}
-
-.modalInput {
-  border-radius: 25px;
-  border: 1px solid #d2d7e0;
-}
-
-.modalButton {
-  background: linear-gradient(90deg, #9EA7FC 0%, #65B6F7 124.87%);
-  font-size: 16px;
-  color: white;
-  box-sizing: border-box;
-  padding: 10px 15px ;
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  border-radius: 25px;
-  border: 1px solid #888fdb;
-}
-
-.red {
-  background: linear-gradient(133.98deg, #C781FF -18.23%, #E57373 125.36%);
-}
-
-.modalDelete {
-  min-height: 70px;
 }
 
 .isDisableCard {
